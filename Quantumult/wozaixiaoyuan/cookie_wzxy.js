@@ -1,6 +1,6 @@
 /**
  * QX重写配置
- * https:\/\/gw\.wozaixiaoyuan\.com\/basicinfo\/mobile\/my\/index url script-request-header https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/cookie_wzxy.js
+ * ^https:\/\/gw\.wozaixiaoyuan\.com\/basicinfo\/mobile\/my\/index url script-request-header https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/cookie_wzxy.js
  * @type {string}
  */
 
@@ -13,7 +13,7 @@ if (cookieVal) {
         chavy.msg(`${cookieName}`, '获取JWSESSION: 成功', '')
         chavy.log(`[${cookieName}] 获取JWSESSION: 成功, cookie: ${cookieVal}`)
     }
-}https
+}
 function init() {
     isSurge = () => {
         return undefined === this.$httpClient ? false : true
