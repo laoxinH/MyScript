@@ -12,10 +12,10 @@
 
 const $laoxin = new Env("我在校园健康打卡")
 const cookieKey = 'Cookie_wzxy';
-const cookieVal = $request.headers['Cookie'];  // 获取jwsession
+const cookieVal = $request.headers['JWSESSION'];  // 获取jwsession
 if (cookieVal) {
     if ($laoxin.setdata(cookieVal,cookieKey)) {
-        $laoxin.msg(`${$laoxin.name}`, '获取JWSESSION: 成功', '测试',"也是测试")
+        $laoxin.msg(`${$laoxin.name}`, '获取JWSESSION: 成功', cookieVal,"")
         $laoxin.log(`[${$laoxin.name}] 获取JWSESSION: 成功, cookie: ${cookieVal}`)
     }
 }
