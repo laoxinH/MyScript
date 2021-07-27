@@ -1,0 +1,100 @@
+{
+  "id": "laoxin.app.sub",
+  "name": "laoxin 脚本订阅",
+  "description": "该订阅兼容BoxJs",
+  "author": "@laoxinH",
+  "icon": "https://avatars.githubusercontent.com/u/53307507?s=400&u=d2e77cb0686d63791da9712eff168a068e96ab88&v=4",
+  "repo": "https://github.com/laoxinH/MyScript",
+  "apps": [
+    {
+      "id": "我在校园健康签到",
+      "name": "日在校园签到",
+      "keys": [
+        "Cookie_wzxy"
+      ],
+      "descs_html": [
+        "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js\">脚本注释</a></h4>",
+        "<br />",
+        "<h3 align=\"center\">签到相关教程</h3>",
+        "<p align=\"center\"><iframe src=\"https://www.youtube.com/embed/6vMz1LKF1-8\" width=\"100%\" height=\"100%\"></iframe></p>"
+      ],
+      "scripts": [
+        {
+          "name": "我在校园健康打卡",
+          "script": "脚本地址"
+        }
+      ],
+      "settings": [
+        {
+          "id": "wzxy_answers",
+          "name": "答案",
+          "val": "",
+          "type": "text",
+          "desc": "答案格式:[\"0\",\"0\",\"0\",\"2\",\"3\",\"2\"]"
+        },
+        {
+          "id": "wzxy_latitude",
+          "name": "经度",
+          "val": "",
+          "type": "text",
+          "desc": "示列格式:31.666566848754883"
+        },
+        {
+          "id": "wzxy_longitude",
+          "name": "纬度",
+          "val": "",
+          "type": "text",
+          "desc": "示列格式:106.76924896240234"
+        },
+        {
+          "id": "wzxy_country",
+          "name": "国家",
+          "val": "中国",
+          "type": "text",
+          "desc": "示列格式:中国(默认中国)"
+        },
+        {
+          "id": "wzxy_city",
+          "name": "城市",
+          "val": "",
+          "type": "text",
+          "desc": "示列格式:某市"
+        },
+        {
+          "id": "wzxy_district",
+          "name": "区(县)",
+          "val": "",
+          "type": "text",
+          "desc": "示列格式:某区(某县)"
+        },
+        {
+          "id": "wzxy_province",
+          "name": "省",
+          "val": "",
+          "type": "text",
+          "desc": "示列格式:某省"
+        },
+        {
+          "id": "wzxy_township",
+          "name": "街(乡镇)",
+          "val": "",
+          "type": "text",
+          "desc": "示列格式:某街(某镇)"
+        },
+        {
+          "id": "wzxy_city",
+          "name": "路",
+          "val": "",
+          "type": "text",
+          "desc": "示列格式:某路(如凤阳路)"
+        }
+      ],
+      "author": "@laoxinH",
+      "repo": "https://github.com/laoxinH/MyScript",
+      "icons": [
+        "https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/jd.png",
+        "https://raw.githubusercontent.com/NobyDa/mini/master/Color/jd.png"
+      ]
+    }
+  ]
+}
