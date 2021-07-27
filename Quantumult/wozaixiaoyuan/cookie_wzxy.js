@@ -15,10 +15,10 @@ const cookieKey = 'Cookie_wzxy';
 const cookieVal = $request.headers['JWSESSION'];  // 获取jwsession
 if (cookieVal) {
     if ($laoxin.setdata(cookieVal,cookieKey)) {
-        $laoxin.msg(`${cookieName}`, '获取JWSESSION: 成功', `cookie:${cookieVal}`,"获取成功");
-        $laoxin.log(`[${cookieName}] 获取JWSESSION: 成功, cookie: ${cookieVal}`);
+        $laoxin.msg(`${$laoxin.name}`, '获取JWSESSION: 成功', `cookie:${cookieVal}`,"获取成功");
+        $laoxin.log(`[${$laoxin.name}] 获取JWSESSION: 成功, cookie: ${cookieVal}`);
     } else {
-        $laoxin.msg(`${cookieName}`, '获取JWSESSION: 失败', `请重新获取`,"获取失败");
+        $laoxin.msg(`${$laoxin.name}`, '获取JWSESSION: 失败', `请重新获取`,"获取失败");
     }
 }
 $laoxin.done();
