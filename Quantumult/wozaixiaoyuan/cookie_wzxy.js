@@ -11,7 +11,7 @@
  */
 
 const $laoxin = new Env("我在校园健康打卡")
-const cookieKey = 'cookie_wzxy';
+const cookieKey = 'Cookie_wzxy';
 const cookieVal = $request.headers['JWSESSION'];  // 获取jwsession
 if (cookieVal) {
     if ($laoxin.setdata(cookieVal,cookieKey)) {
