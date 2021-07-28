@@ -41,7 +41,7 @@ let data_answers = {
 
 let reg_count = "";
 if (!cookieKey){
-    $laoxin.msg($laoxin.name,`当前cookie:${cookieVal}---已失效`,"请打开我在校园小程序--\"我的\"重新获取!");
+    $laoxin.msg($laoxin.name,`🔈当前cookie:${cookieVal}---已失效`,"【提示】请打开我在校园小程序--\"我的\"重新获取!");
     $laoxin.done();
 } else {
     start();
