@@ -39,7 +39,7 @@ const data_answers = {
 };
 $laoxin.log(`当前区域代码:${data_answers.areacode}`)
 
-if (cookieKey){
+if (!cookieKey){
     detail = `当前cookie:${cookieVal}---已失效\r\n请打开我在校园小程序--"我的"重新获取!`;
     $laoxin.done();
 }
