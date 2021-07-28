@@ -37,7 +37,7 @@ const data_answers = {
     street: encodeURI("") || encodeURI($laoxin.getdata("wzxy_street")),             // 路
     areacode:"" || getAreCode()                                     // 区域代码
 };
-
+register();
 //打卡方法
 function register() {
     let title = $laoxin.name;
