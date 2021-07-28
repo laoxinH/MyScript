@@ -37,7 +37,7 @@ const data_answers = {
     street: encodeURI("") || encodeURI($laoxin.getdata("wzxy_street")),             // 路
     areacode:"" || getAreCode()                                     // 区域代码
 };
-
+$laoxin.log(`区域代码:${data_answers.areacode}`)
 
 register();
 //打卡方法
@@ -54,8 +54,8 @@ function register() {
         const result = JSON.parse(data);
         //签到成功
         if (result && result.code == 0) {
-            subTitle = "打卡成功!"
-            detail = `签到成功\r\n当前签到日期:${$laoxin.time("yyyy-MM-dd")}\r\n累计签到次数${getRegNum()}`;
+            subTitle = "签到成功!"
+            detail = `当前签到日期:${$laoxin.time("yyyy-MM-dd")}\r\n累计签到次数${getRegNum()}`;
         } else if (result.code == -10){
             // 签到失败
             subTitle = "cookie失效!";
@@ -80,6 +80,7 @@ function getRegNum(){
         const result = JSON.parse(data);
         if (result && result.code == 0){
             num =  result.data.length;
+            $laoxin.log(`获取的数据量:${result.data.length}`)
         }
     })
     return num;
@@ -102,7 +103,7 @@ function getAreCode() {
             const result = JSON.parse(data);
             if (result && result.status == 1) {
                 adcode = result.regeocode.addressComponent.adcode;
-                $laoxin.msg("区域代码获取成功","开始签到",`区域代码:${adcode}`);
+                //$laoxin.msg("区域代码获取成功","开始签到",`区域代码:${adcode}`);
             }else {
                 $laoxin.msg("区域代码获取失败","请重新获取",`如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
             }
