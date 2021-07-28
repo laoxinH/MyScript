@@ -37,7 +37,7 @@ const data_answers = {
     street: encodeURI("") || encodeURI($laoxin.getdata("wzxy_street")),             // 路
     areacode:"" || getAreCode()                                     // 区域代码
 };
-
+ $laoxin.msg("区域代码获取成功","开始签到",`区域代码:${data_answers.areacode}`);
 
 register();
 //打卡方法
@@ -89,8 +89,7 @@ function getAreCode() {
         const latitude = $laoxin.getdata("wzxy_latitude");
         const longitude = $laoxin.getdata("wzxy_longitude");
         const url = `https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=${longitude}%2C${latitude}&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`;
-        $laoxin.msg("数据获取","data",url);
-
+        //$laoxin.msg("数据获取","data",url);
         $laoxin.post(getRequestData(url,""),(onerror,response,data) =>{
             if (onerror) {
                 $laoxin.logErr(onerror);
