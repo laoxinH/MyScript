@@ -25,7 +25,7 @@ const cookieVal = $laoxin.getdata(cookieKey);
 * https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=106.76937866210938%2C31.666606903076172&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0
 * */
 
-const data_answers = {
+let data_answers = {
     answers: encodeURI("") || encodeURI($laoxin.getdata("wzxy_answers")),           //填写答案,格式["0","0","0","2","3","2"]
     latitude: "" || $laoxin.getdata("wzxy_latitude"),                                   //经度
     longitude: "" || $laoxin.getdata("wzxy_longitude"),                                 // 纬度
@@ -35,16 +35,24 @@ const data_answers = {
     province: encodeURI("") || encodeURI($laoxin.getdata("wzxy_province")),         // 省
     township: encodeURI("") || encodeURI($laoxin.getdata("wzxy_township")),         // 街道(镇)
     street: encodeURI("") || encodeURI($laoxin.getdata("wzxy_street")),             // 路
-    areacode:"" || getAreCode().then((x) => {return x} )                                     // 区域代码
+    areacode:"" || $laoxin.getdata("wzxy_areacode")                                     // 区域代码
 };
 $laoxin.log(`当前区域代码:${data_answers.areacode}`)
-
+let reg_count = "";
 if (!cookieKey){
-    detail = `当前cookie:${cookieVal}---已失效\r\n请打开我在校园小程序--"我的"重新获取!`;
+    $laoxin.msg($laoxin.name,`当前cookie:${cookieVal}---已失效`,"请打开我在校园小程序--\"我的\"重新获取!");
     $laoxin.done();
+} else {
+    start().then();
 }
-
-register();
+async function start() {
+    if (!data_answers.areacode){
+        getAreCode(); 
+    }
+    getRegNum();
+    await $laoxin.wait(1000);
+    register();
+}
 //打卡方法
 function register() {
     let title = $laoxin.name;
@@ -60,7 +68,7 @@ function register() {
         //签到成功
         if (result && result.code == 0) {
             subTitle = "签到成功!";
-            detail = `当前签到日期:${$laoxin.time("yyyy-MM-dd")}\r\n累计签到次数${getRegNum().then((x)=>{return x})}`;
+            detail = `当前签到日期:${$laoxin.time("yyyy-MM-dd")}\r\n累计签到次数${reg_count}}`;
         } else if (result.code == -10){
             // 签到失败
             subTitle = "cookie失效!";
@@ -76,8 +84,7 @@ function register() {
 }
 
 // 获取签到次数
-async function getRegNum(){
-    let num = "";
+function getRegNum(){
     $laoxin.post(getRequestData("getHealthLatest.json"),(onerror,response,data) => {
         if (onerror) {
             $laoxin.logErr(onerror);
@@ -85,18 +92,15 @@ async function getRegNum(){
         }
         const result = JSON.parse(data);
         if (result && result.code == 0){
-            num =  result.data.length;
-            $laoxin.log(`获取的数据量:${result.data.length}`)
+            reg_count =  result.data.length;
+            $laoxin.log(`获取的数据量:${reg_count}`)
         } else {
-            $laoxin.log(`获取失败:${JSON.stringify(result)}`)
+            $laoxin.log(`获取失败:${JSON.stringify(result)}`);
         }
     })
-    await $laoxin.wait(500);
-    return num;
 }
 // 获取区域地址
-async function getAreCode() {
-    let adcode =$laoxin.getdata("wzxy_areacode");
+function getAreCode() {
     if (!adcode) {
         const latitude = $laoxin.getdata("wzxy_latitude");
         const longitude = $laoxin.getdata("wzxy_longitude");
@@ -110,15 +114,13 @@ async function getAreCode() {
             }
             const result = JSON.parse(data);
             if (result && result.status == 1) {
-                adcode = result.regeocode.addressComponent.adcode;
-                $laoxin.log("区域代码获取成功","开始签到",`区域代码:${adcode}`);
+                data_answers.areacode = result.regeocode.addressComponent.adcode;
+                $laoxin.log("区域代码获取成功","开始签到",`区域代码:${data_answers.areacode}`);
             }else {
                 $laoxin.msg("区域代码获取失败","请重新获取",`如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
             }
         })
     }
-    await $laoxin.wait(500);
-    return adcode;
 }
 
 // 生成请求参数
