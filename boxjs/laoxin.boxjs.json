@@ -90,10 +90,10 @@
         },
         {
           "id": "wzxy_areacode",
-          "name": "路",
+          "name": "区域代码",
           "val": "",
           "type": "text",
-          "desc": "示列格式:某路(如凤阳路)"
+          "desc": "可在百度中查询"
         }
       ],
       "author": "@laoxinH",
