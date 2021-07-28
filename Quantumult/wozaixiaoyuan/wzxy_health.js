@@ -87,7 +87,8 @@ function getAreCode() {
         const latitude = $laoxin.getdata("wzxy_latitude");
         const longitude = $laoxin.getdata("wzxy_longitude");
         const url = `https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=${latitude}%2C${longitude}
-                   &extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`
+                   &extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`；
+        $laoxin.msg("数据获取","data",url);
         $laoxin.post(getRequestData(url,""),(onerror,response,data) =>{
             if (onerror) {
                 $laoxin.logErr(onerror);
