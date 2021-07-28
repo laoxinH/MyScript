@@ -37,7 +37,7 @@ const data_answers = {
     street: encodeURI("") || encodeURI($laoxin.getdata("wzxy_street")),             // 路
     areacode:"" || getAreCode()                                     // 区域代码
 };
-$laoxin.log(`区域代码:${data_answers.areacode}`)
+$laoxin.log(`当前区域代码:${data_answers.areacode}`)
 
 register();
 //打卡方法
@@ -83,9 +83,11 @@ function getRegNum(){
             $laoxin.log(`获取的数据量:${result.data.length}`)
         }
     })
+    if (num == "") {
+        $laoxin.wait(500);
+    }
     return num;
 }
-
 // 获取区域地址
 function getAreCode() {
     let adcode =$laoxin.getdata("wzxy_areacode");
@@ -103,13 +105,15 @@ function getAreCode() {
             const result = JSON.parse(data);
             if (result && result.status == 1) {
                 adcode = result.regeocode.addressComponent.adcode;
-                $laoxin.msg("区域代码获取成功","开始签到",`区域代码:${adcode}`);
+                $laoxin.log("区域代码获取成功","开始签到",`区域代码:${adcode}`);
             }else {
                 $laoxin.msg("区域代码获取失败","请重新获取",`如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
             }
         })
     }
-    $laoxin.msg("区域代码获取成功","开始签到",`区域代码:${adcode}`);
+    if (adcode == "") {
+        $laoxin.wait(500);
+    }
     return adcode;
 }
 
