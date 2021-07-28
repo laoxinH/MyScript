@@ -43,16 +43,14 @@ if (!cookieKey){
     $laoxin.msg($laoxin.name,`当前cookie:${cookieVal}---已失效`,"请打开我在校园小程序--\"我的\"重新获取!");
     $laoxin.done();
 } else {
-    start().then((x)=>{return x});
+    start();
 }
-async function start() {
+function start() {
     if (!data_answers.areacode){
         getAreCode();
     }
     getRegNum();
-    await $laoxin.wait(1000);
     register();
-    return;
 }
 //打卡方法
 function register() {
