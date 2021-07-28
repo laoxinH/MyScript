@@ -110,7 +110,7 @@ function getAreCode() {
 
 // 生成请求参数
 function getRequestData(type,body){
-       const url = type.indexOf("http") ? type : `https://student.wozaixiaoyuan.com/health/${type}`;
+       const url = type.indexOf("http") !=-1 ? type : `https://student.wozaixiaoyuan.com/health/${type}`;
        const headers = {
             "Host": "student.wozaixiaoyuan.com",
             "Content-Type": "application/x-www-form-urlencoded",
