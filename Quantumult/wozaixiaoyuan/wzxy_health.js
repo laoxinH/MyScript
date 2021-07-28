@@ -76,7 +76,8 @@ function register() {
             detail = `当前cookie:${cookieVal}---已失效\r\n请打开我在校园小程序--"我的"重新获取!`;
         } else {
             subTitle = "答案不完整,请检查!"
-            detail = `请检查脚本(或者boxjs)答案处是否填写完整`;
+            detail = `请检查脚本(或者boxjs)答案处是否填写完整\r\n${JSON.stringify(result)}`;
+
         }
         $laoxin.msg(title,subTitle,detail);
         $laoxin.done();
@@ -138,6 +139,7 @@ function getRequestData(type,body){
             "Cookie":"[object Null]",
             "JWSESSION":cookieVal
         };
+        $laoxin.log(body);
         return {url:url,headers:headers,body:body};
 }
 //https://gw.wozaixiaoyuan.com/basicinfo/mobile/login/username?username=18382750609&password=laoxin0318&openId=o0-5d1rUvXNaZ9HqrVD9-g8QogHI&unionId=oUXUs1ZLNSUVEVEY3cuHSyP-JFn4&phoneInfo=3____ipad%3B+cpu+os+14_6+like+mac+os+x
