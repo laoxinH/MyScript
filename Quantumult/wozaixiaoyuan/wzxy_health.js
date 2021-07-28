@@ -39,6 +39,11 @@ const data_answers = {
 };
 $laoxin.log(`当前区域代码:${data_answers.areacode}`)
 
+if (cookieKey){
+    detail = `当前cookie:${cookieVal}---已失效\r\n请打开我在校园小程序--"我的"重新获取!`;
+    $laoxin.done();
+}
+
 register();
 //打卡方法
 function register() {
@@ -54,11 +59,12 @@ function register() {
         const result = JSON.parse(data);
         //签到成功
         if (result && result.code == 0) {
-            subTitle = "签到成功!"
+            subTitle = "签到成功!";
             detail = `当前签到日期:${$laoxin.time("yyyy-MM-dd")}\r\n累计签到次数${getRegNum()}`;
         } else if (result.code == -10){
             // 签到失败
             subTitle = "cookie失效!";
+            $laoxin.setdata("",cookieKey);
             detail = `当前cookie:${cookieVal}---已失效\r\n请打开我在校园小程序--"我的"重新获取!`;
         } else {
             subTitle = "答案不完整,请检查!"
@@ -81,11 +87,12 @@ function getRegNum(){
         if (result && result.code == 0){
             num =  result.data.length;
             $laoxin.log(`获取的数据量:${result.data.length}`)
+        } else {
+            $laoxin.log(`获取失败:${JSON.stringify(result)}`)
         }
     })
-    if (num == "") {
-        $laoxin.wait(500);
-    }
+
+    $laoxin.wait(500);
     return num;
 }
 // 获取区域地址
@@ -111,9 +118,7 @@ function getAreCode() {
             }
         })
     }
-    if (adcode == "") {
-        $laoxin.wait(500);
-    }
+    $laoxin.wait(500);
     return adcode;
 }
 
