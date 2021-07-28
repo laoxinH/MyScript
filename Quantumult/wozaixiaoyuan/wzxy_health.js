@@ -10,7 +10,7 @@
  [mitm]
  hostname = gw.woziaxiaoyuan.com
 
- 脚本订阅地址
+
 
  *
  * */
@@ -37,6 +37,8 @@ const data_answers = {
     street: encodeURI("") || encodeURI($laoxin.getdata("wzxy_street")),             // 路
     areacode:"" || getAreCode()                                     // 区域代码
 };
+
+
 register();
 //打卡方法
 function register() {
@@ -53,11 +55,11 @@ function register() {
         //签到成功
         if (result && result.code == 0) {
             subTitle = "打卡成功!"
+            detail = `签到成功/r/n当前签到日期:${$laoxin.time("yyyy-MM-dd")}/r/n累计签到次数${getRegNum()}`;
         } else if (result.code == -10){
             // 签到失败
             subTitle = "cookie失效!";
             detail = `当前cookie:${cookieVal}---已失效/r/n请打开我在校园小程序--"我的"重新获取!`;
-            detail = `签到成功/r/n当前签到日期:${$laoxin.time("yyyy-MM-dd")}/r/n累计签到次数${getRegNum()}`;
         } else {
             subTitle = "答案不完整,请检查!"
             detail = `请检查脚本(或者boxjs)答案处是否填写完整`;
@@ -86,7 +88,9 @@ function getAreCode() {
     if (!$laoxin.getdata("wzxy_areacode")) {
         const latitude = $laoxin.getdata("wzxy_latitude");
         const longitude = $laoxin.getdata("wzxy_longitude");
-        const url = `https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=${latitude}%2C${longitude}&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`
+        const url = `https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=${latitude}%2C${longitude}&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`;
+        $laoxin.msg("数据获取","data",url);
+
         $laoxin.post(getRequestData(url,""),(onerror,response,data) =>{
             if (onerror) {
                 $laoxin.logErr(onerror);
@@ -129,7 +133,7 @@ function getRequestData(type,body){
 //https://gw.wozaixiaoyuan.com/basicinfo/mobile/login/username?username=18382750609&password=laoxin0318&openId=o0-5d1rUvXNaZ9HqrVD9-g8QogHI&unionId=oUXUs1ZLNSUVEVEY3cuHSyP-JFn4&phoneInfo=3____ipad%3B+cpu+os+14_6+like+mac+os+x
 // json序列化
 function toStringBody(parse){
-    $laoxin.log("数据获取","json",JSON.stringify(parse));
+    //$laoxin.log("数据获取","json",JSON.stringify(parse));
     let stringBody = "";
     for (let key in parse) {
         stringBody += (key + "=" + parse[key] + "&");
