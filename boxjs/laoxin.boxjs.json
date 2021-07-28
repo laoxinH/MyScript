@@ -82,7 +82,14 @@
           "desc": "示列格式:某街(某镇)"
         },
         {
-          "id": "wzxy_city",
+          "id": "wzxy_street",
+          "name": "路",
+          "val": "",
+          "type": "text",
+          "desc": "示列格式:某路(如凤阳路)"
+        },
+        {
+          "id": "wzxy_areacode",
           "name": "路",
           "val": "",
           "type": "text",
