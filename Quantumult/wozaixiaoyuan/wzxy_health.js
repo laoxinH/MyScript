@@ -44,7 +44,7 @@ function register() {
     let subTitle,
         detail;
     //$laoxin.msg("数据获取","data",JSON.stringify(request_data));
-    $laoxin.post(getRequestData("save.json",data_answers),(onerror,response,data)=>{
+    $laoxin.post(getRequestData("save.json",toStringBody(data_answers)),(onerror,response,data)=>{
         if (onerror) {
             $laoxin.logErr(onerror);
             $laoxin.done();
