@@ -103,12 +103,13 @@ function getAreCode() {
             const result = JSON.parse(data);
             if (result && result.status == 1) {
                 adcode = result.regeocode.addressComponent.adcode;
-                //$laoxin.msg("区域代码获取成功","开始签到",`区域代码:${adcode}`);
+                $laoxin.msg("区域代码获取成功","开始签到",`区域代码:${adcode}`);
             }else {
                 $laoxin.msg("区域代码获取失败","请重新获取",`如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
             }
         })
     }
+    $laoxin.msg("区域代码获取成功","开始签到",`区域代码:${adcode}`);
     return adcode;
 }
 
