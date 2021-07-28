@@ -101,7 +101,6 @@ function getRegNum(){
 }
 // 获取区域地址
 function getAreCode() {
-    if (!adcode) {
         const latitude = $laoxin.getdata("wzxy_latitude");
         const longitude = $laoxin.getdata("wzxy_longitude");
         const url = `https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=${longitude}%2C${latitude}&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`;
@@ -121,7 +120,6 @@ function getAreCode() {
             }
         })
     }
-}
 
 // 生成请求参数
 function getRequestData(type,body){
