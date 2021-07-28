@@ -9,7 +9,8 @@
 
  [mitm]
  hostname = gw.woziaxiaoyuan.com
-
+订阅地址
+ https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/wzxy_health.js
 
 
  *
@@ -37,7 +38,7 @@ let data_answers = {
     street: encodeURI("") || encodeURI($laoxin.getdata("wzxy_street")),             // 路
     areacode:"" || $laoxin.getdata("wzxy_areacode")                                     // 区域代码
 };
-$laoxin.log(`当前区域代码:${data_answers.areacode}`)
+
 let reg_count = "";
 if (!cookieKey){
     $laoxin.msg($laoxin.name,`当前cookie:${cookieVal}---已失效`,"请打开我在校园小程序--\"我的\"重新获取!");
@@ -51,6 +52,7 @@ function start() {
     }
     getRegNum();
     $laoxin.log("等待⏱ 1 秒后开始执行");
+    $laoxin.log(`当前区域代码:${data_answers.areacode}`)
     setTimeout(register,1000);
 }
 //打卡方法
@@ -67,17 +69,16 @@ function register() {
         const result = JSON.parse(data);
         //签到成功
         if (result && result.code == 0) {
-            subTitle = "签到成功!";
-            detail = `当前签到日期:${$laoxin.time("yyyy-MM-dd")}\r\n累计签到次数${reg_count}}`;
+            subTitle = "✔签到成功!";
+            detail = `【记录】当前签到日期:${$laoxin.time("yyyy-MM-dd")}\r\n👏累计签到次数${reg_count}}👏`;
         } else if (result.code == -10){
             // 签到失败
-            subTitle = "cookie失效!";
+            subTitle = "❌cookie失效!";
             $laoxin.setdata("",cookieKey);
-            detail = `当前cookie:${cookieVal}---已失效\r\n请打开我在校园小程序--"我的"重新获取!`;
+            detail = `【提示】当前cookie:${cookieVal}---已失效\r\n请打开我在校园小程序--"我的"重新获取!`;
         } else {
-            subTitle = "答案不完整,请检查!"
-            detail = `请检查脚本(或者boxjs)答案处是否填写完整\r\n${JSON.stringify(result)}`;
-
+            subTitle = "❌答案不完整或已过签到时间,请检查!"
+            detail = `【提示】请检查脚本(或者boxjs)答案处是否填写完整\r\n${JSON.stringify(result)}`;
         }
         $laoxin.msg(title,subTitle,detail);
         $laoxin.done();
@@ -89,12 +90,11 @@ function getRegNum(){
     $laoxin.post(getRequestData("getHealthLatest.json"),(onerror,response,data) => {
         if (onerror) {
             $laoxin.logErr(onerror);
-            num = "获取失败!"
         }
         const result = JSON.parse(data);
         if (result && result.code == 0){
             reg_count =  result.data.length;
-            $laoxin.log(`获取的数据量:${reg_count}`)
+            $laoxin.log(`已签到次数:${reg_count}`)
         } else {
             $laoxin.log(`获取失败:${JSON.stringify(result)}`);
         }
@@ -109,7 +109,7 @@ function getAreCode() {
          $laoxin.post(getRequestData(url,""),(onerror,response,data) =>{
             if (onerror) {
                 $laoxin.logErr(onerror);
-                $laoxin.msg("区域代码获取失败","请重新获取",`如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
+                $laoxin.msg("🔈区域代码获取失败","请重新获取",`【提示】如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
                 $laoxin.done();
             }
             const result = JSON.parse(data);
@@ -117,7 +117,7 @@ function getAreCode() {
                 data_answers.areacode = result.regeocode.addressComponent.adcode;
                 $laoxin.log("区域代码获取成功","开始签到",`区域代码:${data_answers.areacode}`);
             }else {
-                $laoxin.msg("区域代码获取失败","请重新获取",`如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
+                $laoxin.msg("🔈区域代码获取失败","请重新获取",`【提示】如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
             }
         })
     }
@@ -139,7 +139,6 @@ function getRequestData(type,body){
             "Cookie":"[object Null]",
             "JWSESSION":cookieVal
         };
-        $laoxin.log(body);
         return {url:url,headers:headers,body:body};
 }
 //https://gw.wozaixiaoyuan.com/basicinfo/mobile/login/username?username=18382750609&password=laoxin0318&openId=o0-5d1rUvXNaZ9HqrVD9-g8QogHI&unionId=oUXUs1ZLNSUVEVEY3cuHSyP-JFn4&phoneInfo=3____ipad%3B+cpu+os+14_6+like+mac+os+x
