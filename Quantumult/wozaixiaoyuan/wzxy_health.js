@@ -37,7 +37,7 @@ const data_answers = {
     street: encodeURI("") || encodeURI($laoxin.getdata("wzxy_street")),             // 路
     areacode:"" || getAreCode()                                     // 区域代码
 };
- $laoxin.msg("区域代码获取成功","开始签到",`区域代码:${data_answers.areacode}`);
+
 
 register();
 //打卡方法
@@ -55,11 +55,11 @@ function register() {
         //签到成功
         if (result && result.code == 0) {
             subTitle = "打卡成功!"
-            detail = `签到成功/r/n当前签到日期:${$laoxin.time("yyyy-MM-dd")}/r/n累计签到次数${getRegNum()}`;
+            detail = `签到成功\r\n当前签到日期:${$laoxin.time("yyyy-MM-dd")}\r\n累计签到次数${getRegNum()}`;
         } else if (result.code == -10){
             // 签到失败
             subTitle = "cookie失效!";
-            detail = `当前cookie:${cookieVal}---已失效/r/n请打开我在校园小程序--"我的"重新获取!`;
+            detail = `当前cookie:${cookieVal}---已失效\r\n请打开我在校园小程序--"我的"重新获取!`;
         } else {
             subTitle = "答案不完整,请检查!"
             detail = `请检查脚本(或者boxjs)答案处是否填写完整`;
@@ -71,6 +71,7 @@ function register() {
 
 // 获取签到次数
 function getRegNum(){
+    let num = NaN;
     $laoxin.post(getRequestData("getHealthLatest.json"),(onerror,response,data) => {
         if (onerror) {
             $laoxin.logErr(onerror);
@@ -78,18 +79,20 @@ function getRegNum(){
         }
         const result = JSON.parse(data);
         if (result && result.code == 0){
-            return result.data.length;
+            num =  result.data.length;
         }
     })
+    return num;
 }
 
 // 获取区域地址
 function getAreCode() {
-    if (!$laoxin.getdata("wzxy_areacode")) {
+    let adcode =$laoxin.getdata("wzxy_areacode");
+    if (!adcode) {
         const latitude = $laoxin.getdata("wzxy_latitude");
         const longitude = $laoxin.getdata("wzxy_longitude");
         const url = `https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=${longitude}%2C${latitude}&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`;
-        //$laoxin.msg("数据获取","data",url);
+        $laoxin.msg("数据获取","data",url);
         $laoxin.post(getRequestData(url,""),(onerror,response,data) =>{
             if (onerror) {
                 $laoxin.logErr(onerror);
@@ -98,16 +101,14 @@ function getAreCode() {
             }
             const result = JSON.parse(data);
             if (result && result.status == 1) {
-                const adcode = result.regeocode.addressComponent.adcode;
+                adcode = result.regeocode.addressComponent.adcode;
                 $laoxin.msg("区域代码获取成功","开始签到",`区域代码:${adcode}`);
-                return adcode;
             }else {
                 $laoxin.msg("区域代码获取失败","请重新获取",`如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
             }
         })
-    } else {
-        return $laoxin.getdata("wzxy_areacode");
     }
+    return adcode;
 }
 
 // 生成请求参数
