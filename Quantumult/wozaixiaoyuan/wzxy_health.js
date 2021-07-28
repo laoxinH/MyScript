@@ -50,7 +50,8 @@ function start() {
         getAreCode();
     }
     getRegNum();
-    register();
+    console.log("等待⏱ 1 秒后开始执行");
+    setTimeout(register,1000);
 }
 //打卡方法
 function register() {
