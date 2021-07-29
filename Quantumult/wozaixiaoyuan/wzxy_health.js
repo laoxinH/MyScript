@@ -20,7 +20,7 @@
 const $laoxin = new Env("我在校园健康打卡");
 const cookieKey = "Cookie_wzxy";
 const cookieVal = $laoxin.getdata(cookieKey);
-
+const autoLocation = $laoxin.getdata("wzxy_autoLocation")
 /*答案填写区域,boxjs用户直接在boxjs中填写即可
 * 非boxjs用户请在双引号("")中填写
 * https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=106.76937866210938%2C31.666606903076172&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0
@@ -28,17 +28,16 @@ const cookieVal = $laoxin.getdata(cookieKey);
 
 let data_answers = {
     answers: encodeURI("") || encodeURI($laoxin.getdata("wzxy_answers")),           //填写答案,格式["0","0","0","2","3","2"]
-    latitude: "" || $laoxin.getdata("wzxy_latitude"),                                   //经度
-    longitude: "" || $laoxin.getdata("wzxy_longitude"),                                 // 纬度
+    latitude: "" || $laoxin.getdata("wzxy_latitude"),                                   //纬度
+    longitude: "" || $laoxin.getdata("wzxy_longitude"),                                 // 经度
     country: encodeURI("") || encodeURI($laoxin.getdata("wzxy_country")),           // 国家
     city: encodeURI("") || encodeURI($laoxin.getdata("wzxy_city")),                 // 城市
     district:encodeURI("") || encodeURI($laoxin.getdata("wzxy_district")),          // 区(县)
     province: encodeURI("") || encodeURI($laoxin.getdata("wzxy_province")),         // 省
-    township: encodeURI("") || encodeURI($laoxin.getdata("wzxy_township")),         // 街道(镇)
-    street: encodeURI("") || encodeURI($laoxin.getdata("wzxy_street")),             // 路
+    township: encodeURI("") || encodeURI($laoxin.getdata("wzxy_township")),         // 街道(镇) 如东城街道(大塘镇)
+    street: encodeURI("") || encodeURI($laoxin.getdata("wzxy_street")),             // 街
     areacode:"" || $laoxin.getdata("wzxy_areacode")                                     // 区域代码
 };
-
 let reg_count = "";
 if (!cookieKey){
     $laoxin.msg($laoxin.name,`🔈当前cookie:${cookieVal}---已失效`,"【提示】请打开我在校园小程序--\"我的\"重新获取!");
@@ -47,13 +46,13 @@ if (!cookieKey){
     start();
 }
 function start() {
-    if (!data_answers.areacode){
-        getAreCode();
+    if (autoLocation){
+        getLocation();
     }
     getRegNum();
     $laoxin.log("等待⏱ 1 秒后开始执行");
-    $laoxin.log(`当前区域代码:${data_answers.areacode}`)
     setTimeout(register,1000);
+    $laoxin.log(`开始执行签到任务!`)
 }
 //打卡方法
 function register() {
@@ -70,7 +69,7 @@ function register() {
         //签到成功
         if (result && result.code == 0) {
             subTitle = "✔签到成功!";
-            detail = `【记录】当前签到日期:${$laoxin.time("yyyy-MM-dd")}\r\n👏累计签到次数${reg_count}}👏`;
+            detail = `【记录】当前签到日期:${$laoxin.time("yyyy-MM-dd")}\r\n👏累计签到次数：${reg_count}次👏`;
         } else if (result.code == -10){
             // 签到失败
             subTitle = "❌cookie失效!";
@@ -100,24 +99,32 @@ function getRegNum(){
         }
     })
 }
-// 获取区域地址
-function getAreCode() {
+// 获取位置地址
+function getLocation() {
         const latitude = $laoxin.getdata("wzxy_latitude");
         const longitude = $laoxin.getdata("wzxy_longitude");
-        const url = `https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=${longitude}%2C${latitude}&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`;
+        const url = `https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=${latitude}%2C${longitude}&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`;
         //$laoxin.msg("数据获取","data",url);
          $laoxin.post(getRequestData(url,""),(onerror,response,data) =>{
             if (onerror) {
                 $laoxin.logErr(onerror);
-                $laoxin.msg("🔈区域代码获取失败","请重新获取",`【提示】如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
+                $laoxin.msg("🔈位置信息获取失败","请重新获取",`【提示】如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
                 $laoxin.done();
             }
             const result = JSON.parse(data);
             if (result && result.status == 1) {
                 data_answers.areacode = result.regeocode.addressComponent.adcode;
-                $laoxin.log("区域代码获取成功","开始签到",`区域代码:${data_answers.areacode}`);
+                data_answers.city = result.regeocode.addressComponent.city;
+                data_answers.country = result.regeocode.addressComponent.country;
+                data_answers.district = result.regeocode.addressComponent.district;
+                data_answers.province = result.regeocode.addressComponent.province;
+                data_answers.township = result.regeocode.addressComponent.township;
+                data_answers.street = result.regeocode.addressComponent.streetNumber.street;
+                $laoxin.log("[log]位置获取成功",
+                    `当前位置${data_answers.country}${data_answers.province}${data_answers.city}${data_answers.district}${data_answers.township}${data_answers.street}`,
+                    `区域代码:${data_answers.areacode}`);
             }else {
-                $laoxin.msg("🔈区域代码获取失败","请重新获取",`【提示】如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
+                $laoxin.msg("🔈位置信息获取失败","请重新获取",`【提示】如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
             }
         })
     }
