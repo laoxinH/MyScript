@@ -103,7 +103,7 @@ function getRegNum(){
 function getLocation() {
         const latitude = $laoxin.getdata("wzxy_latitude");
         const longitude = $laoxin.getdata("wzxy_longitude");
-        const url = `https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=${latitude}%2C${longitude}&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`;
+        const url = `https://restapi.amap.com/v3/geocode/regeo?key=5df7fee749f489424dd417dfcb792b45&location=${longitude}%2C${latitude}&extensions=all&s=rsx&platform=WXJS&appname=5df7fee749f489424dd417dfcb792b45&sdkversion=1.2.0&logversion=2.0`;
         //$laoxin.msg("数据获取","data",url);
          $laoxin.post(getRequestData(url,""),(onerror,response,data) =>{
             if (onerror) {
@@ -125,6 +125,7 @@ function getLocation() {
                     `区域代码:${data_answers.areacode}`);
             }else {
                 $laoxin.msg("🔈位置信息获取失败","请重新获取",`【提示】如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
+                $laoxin.done();
             }
         })
     }
