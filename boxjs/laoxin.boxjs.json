@@ -12,19 +12,20 @@
       "keys": [
         "Cookie_wzxy"
       ],
-      "descs_html": [
-        "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js\">脚本注释</a></h4>",
-        "<br />",
-        "<h3 align=\"center\">签到相关教程</h3>",
-        "<p align=\"center\"><iframe src=\"https://www.youtube.com/embed/6vMz1LKF1-8\" width=\"100%\" height=\"100%\"></iframe></p>"
-      ],
       "scripts": [
         {
           "name": "我在校园健康打卡",
-          "script": "脚本地址"
+          "script": "https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/wzxy_health.js"
         }
       ],
       "settings": [
+        {
+          "id": "wzxy_autoLocation",
+          "name": "根据经纬度获取位置信息",
+          "val": true,
+          "type": "boolean",
+          "desc": "开启该设置后,只需要填写答案,经度,纬度三个选项,其余选项由脚本获取,若不开启均需手动填写"
+        },
         {
           "id": "wzxy_answers",
           "name": "答案",
@@ -33,18 +34,18 @@
           "desc": "答案格式:[\"0\",\"0\",\"0\",\"2\",\"3\",\"2\"]"
         },
         {
-          "id": "wzxy_latitude",
+          "id": "wzxy_longitude",
           "name": "经度",
           "val": "",
           "type": "text",
-          "desc": "示列格式:31.666566848754883"
+          "desc": "示列格式:31.666567"
         },
         {
-          "id": "wzxy_longitude",
+          "id": "wzxy_latitude",
           "name": "纬度",
           "val": "",
           "type": "text",
-          "desc": "示列格式:106.76924896240234"
+          "desc": "示列格式:106.769248"
         },
         {
           "id": "wzxy_country",
@@ -58,49 +59,48 @@
           "name": "城市",
           "val": "",
           "type": "text",
-          "desc": "示列格式:某市"
+          "desc": "示列格式:北京市"
         },
         {
           "id": "wzxy_district",
           "name": "区(县)",
           "val": "",
           "type": "text",
-          "desc": "示列格式:某区(某县)"
+          "desc": "示列格式:高新区(安岳县)"
         },
         {
           "id": "wzxy_province",
           "name": "省",
           "val": "",
           "type": "text",
-          "desc": "示列格式:某省"
+          "desc": "示列格式:河南省"
         },
         {
           "id": "wzxy_township",
-          "name": "街(乡镇)",
+          "name": "街道(镇)",
           "val": "",
           "type": "text",
-          "desc": "示列格式:某街(某镇)"
+          "desc": "示列格式:东城街道(大塘镇)"
         },
         {
           "id": "wzxy_street",
           "name": "路",
           "val": "",
           "type": "text",
-          "desc": "示列格式:某路(如凤阳路)"
+          "desc": "示列格式:某路(如凤阳街)"
         },
         {
           "id": "wzxy_areacode",
-          "name": "区域代码",
+          "name": "地区编码",
           "val": "",
           "type": "text",
-          "desc": "可在百度中查询"
+          "desc": "示列格式:某路(如凤阳路)"
         }
       ],
       "author": "@laoxinH",
       "repo": "https://github.com/laoxinH/MyScript",
       "icons": [
-        "https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/jd.png",
-        "https://raw.githubusercontent.com/NobyDa/mini/master/Color/jd.png"
+        "https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/icon.jpg?raw=true"
       ]
     }
   ]
