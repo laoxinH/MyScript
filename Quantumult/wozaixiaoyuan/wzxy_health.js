@@ -2,17 +2,19 @@
  * 我在校园健康打卡
  * @author: github@laoxinH
  * @version: 1.0
- 配置方式
- #quanx
+ * 每天10点10分执行自动打卡
+ ==============cookie获取方式===================
+ 打开我在校园微信小程序--"我的",脚本将会自动获取,当看到通知获取成功时即可
+ ===============配置方式=========================
+ ===#quanx====
  [rewrite_local]
  https:\/\/gw\.wozaixiaoyuan\.com\/basicinfo\/mobile\/my\/index url script-request-header https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/cookie_wzxy.js
-
+========================================
  [mitm]
  hostname = gw.woziaxiaoyuan.com
-订阅地址
- https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/wzxy_health.js
-
-
+ ========================================
+ [task_local]
+ 10 10 * * * https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/wzxy_health.js, tag=我在校园健康打卡, img-url=https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/icon.jpg?raw=true, enabled=true
  *
  * */
 
