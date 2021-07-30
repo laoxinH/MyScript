@@ -26,15 +26,15 @@
  * */
 const $laoxin = new Env("我在校园健康打卡");
 const cookieKey = "Cookie_wzxy";
-const cookieVal = $laoxin.getjson(cookieKey);
+let cookieVal = $laoxin.getjson(cookieKey);
 const JWSESSION = ""/**JWSESSION填写处，抓包获取，ios请使用cookie脚本自动获取*/ || cookieVal.JWSESSION;
-const cookieName = ""/**填写自定义cookie名称，ios可通过cookie脚本自动获取 */ || cookieVal.cookieName;
+let cookieName = ""/**填写自定义cookie名称，ios可通过脚本自动获取 */ || cookieVal.cookieName;
 const autoLocation = false /**自动获取位置信息，ios若已安装boxjs请在boxjs中修改,未安装boxjs的和其他用户直接修改即可false表示关闭,true表示开启 */ || $laoxin.getdata("wzxy_autoLocation");
 /**
  *  *****************答案填写说明********************
  *                                                *
  *  *答案填写区域,ios若已安装boxjs直接在boxjs中填写即可  *
- *     *node和未安装boxjs的ios用户请在双引号("")中填写  *             *
+ *     *node和未安装boxjs的ios用户请在双引号("")中填写  *
  *                                                *
  *******       *****************    ***************
  *
@@ -45,6 +45,7 @@ let data_answers = {
     answers: encodeURI("") || encodeURI($laoxin.getdata("wzxy_answers")),           //填写答案,格式["0","0","0","2","3","2"]
     latitude: "" || $laoxin.getdata("wzxy_latitude"),                                   //纬度
     longitude: "" || $laoxin.getdata("wzxy_longitude"),                                 // 经度
+    /** 开启自动获取位置信息时，以下内容无需填写（即使填写也不会生效），只需填写以上的三个内容*/
     country: encodeURI("") || encodeURI($laoxin.getdata("wzxy_country")),           // 国家
     city: encodeURI("") || encodeURI($laoxin.getdata("wzxy_city")),                 // 城市
     district: encodeURI("") || encodeURI($laoxin.getdata("wzxy_district")),          // 区(县)
@@ -63,29 +64,34 @@ if (!cookieKey) {
 
 function start() {
     if (autoLocation) {
-        $laoxin.log("自动获取位置信息已开启,开始获取位置信息!");
+        $laoxin.log("【log】自动获取位置信息已开启,开始获取位置信息!");
         getLocation();
     } else {
-        $laoxin.log("自动获取位置信息已关闭!");
+        $laoxin.log("【log】自动获取位置信息已关闭!");
+    }
+    if (!cookieName){
+        getUserInfo();
     }
     getRegNum();
-    $laoxin.log("等待⏱ 1 秒后开始执行");
+    $laoxin.log("【log】等待⏱ 1 秒后开始执行");
     setTimeout(register, 1000);
-    $laoxin.log(`开始执行签到任务!`);
+    $laoxin.log(`【log】开始执行签到任务!`);
 }
 
-//打卡方法
+//签到方法
 function register() {
     let title = $laoxin.name;
     let subTitle,
         detail;
     //$laoxin.msg("数据获取","data",JSON.stringify(request_data));
-    $laoxin.post(getRequestData("save.json", toStringBody(data_answers)), (onerror, response, data) => {
+    $laoxin.post(getRequestData("health/save.json", toStringBody(data_answers)), (onerror, response, data) => {
+        // 签到出错
         if (onerror) {
             $laoxin.logErr(onerror);
-            $laoxin.done();
+            subTitle = "❌未知错误"
+            detail = "【提示】未知错误，请联系脚本作者获取帮助！"
         }
-        const result = JSON.parse(data);
+        const result = $laoxin.toObj(data);
         //签到成功
         if (result && result.code == 0) {
             subTitle = `【用户】${cookieName}：签到成功!`;
@@ -108,15 +114,15 @@ function register() {
 function getRegNum() {
     $laoxin.post(getRequestData("getHealthLatest.json"), (onerror, response, data) => {
         if (onerror) {
-            $laoxin.logErr(`签到次数获取失败:${onerror}`);
+            $laoxin.logErr(`【log】签到次数获取失败:${onerror}`);
             return;
         }
         const result = $laoxin.toObj(data);
         if (result && result.code == 0) {
             reg_count = result.data.length;
-            $laoxin.log(`已签到次数:${reg_count}`)
+            $laoxin.log(`【log】已签到次数:${reg_count}`)
         } else {
-            $laoxin.log(`获取失败:${JSON.stringify(result)}`);
+            $laoxin.log(`【log】获取失败:${JSON.stringify(result)}`);
         }
     })
 }
@@ -130,10 +136,10 @@ function getLocation() {
     $laoxin.post(getRequestData(url, ""), (onerror, response, data) => {
         if (onerror) {
             $laoxin.logErr(onerror);
-            $laoxin.msg("🔈位置信息获取失败", "请重新获取", `【提示】如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
+            $laoxin.msg("🔈位置信息获取失败", "请重新获取", `【提示】如一直无法获取请关闭自动获取位置信息选项并手动填写到boxjs或者脚本答案区域中`);
             $laoxin.done();
         }
-        const result = JSON.parse(data);
+        const result = $laoxin.toObj(data);
         if (result && result.status == 1) {
             data_answers.areacode = result.regeocode.addressComponent.adcode;
             data_answers.city = result.regeocode.addressComponent.city;
@@ -142,19 +148,40 @@ function getLocation() {
             data_answers.province = result.regeocode.addressComponent.province;
             data_answers.township = result.regeocode.addressComponent.township;
             data_answers.street = result.regeocode.addressComponent.streetNumber.street;
-            $laoxin.log("[log]位置获取成功",
+            $laoxin.log("【log】位置获取成功",
                 `当前位置: ${data_answers.country}${data_answers.province}${data_answers.city}${data_answers.district}${data_answers.township}${data_answers.street}`,
                 `区域代码: ${data_answers.areacode}`);
         } else {
-            $laoxin.msg("🔈位置信息获取失败", "请重新获取", `【提示】如一直无法获取请手动填写到boxjs或者脚本开头代码中`);
+            $laoxin.msg("🔈位置信息获取失败", "请重新获取", `【提示】如一直无法获取请关闭自动获取位置信息选项并手动填写到boxjs或者脚本答案区域中`);
             $laoxin.done();
+        }
+    })
+}
+
+// 获取用户信息
+function getUserInfo(){
+    //https://gw.wozaixiaoyuan.com/basicinfo/mobile/my/index
+    $laoxin.post(getRequestData("basicinfo/mobile/my/index"),(onerror,response,data)=>{
+        if (onerror){
+            $laoxin.logErr(`【log】用户信息获取失败: ${onerror}`)
+            $laoxin.msg("🔈用户信息获取失败", "请重新获取", `【提示】如一直无法获取请手动填写脚本开头代码的cookieName中`);
+            return;
+        }
+        const result = $laoxin.toObj(data);
+        if (result && result.code == 0) {
+            cookieName = result.data.username;
+            cookieVal.cookieName = cookieName;
+            $laoxin.setjson(cookieVal,cookieKey);
+            $laoxin.log("【log】用户信息获取成功，下次将不在获取！")
+        } else {
+            $laoxin.msg("🔈用户信息获取失败", "请重新获取", `【提示】如一直无法获取请手动填写脚本开头代码的cookieName中`);
         }
     })
 }
 
 // 生成请求参数
 function getRequestData(type, body) {
-    const url = type.indexOf("http") != -1 ? type : `https://student.wozaixiaoyuan.com/health/${type}`;
+    const url = type.indexOf("http") != -1 ? type : `https://student.wozaixiaoyuan.com/${type}`;
     const headers = {
         "Host": "student.wozaixiaoyuan.com",
         "Content-Type": "application/x-www-form-urlencoded",
@@ -182,6 +209,7 @@ function toStringBody(parse) {
     }
     return stringBody.substr(0, stringBody.length - 1);
 }
+
 
 
 
