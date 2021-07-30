@@ -13,7 +13,7 @@
 const $laoxin = new Env("我在校园cookie获取");
 const cookieKey = 'Cookie_wzxy';
 const cookieVal = $request.headers['JWSESSION'];  // 获取jwsession
-if (cookieVal && cookieName) {
+if (cookieVal) {
     const cookie = {
         cookieName : "",
         JWSESSION : cookieVal
