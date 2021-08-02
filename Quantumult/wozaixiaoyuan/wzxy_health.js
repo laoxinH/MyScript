@@ -26,10 +26,18 @@
  * */
 const $laoxin = new Env("我在校园健康打卡");
 const cookieKey = "Cookie_wzxy";
-let cookieVal = $laoxin.getjson(cookieKey);
-const JWSESSION = ""/**JWSESSION填写处，抓包获取，ios请使用cookie脚本自动获取*/ || cookieVal.JWSESSION;
-let cookieName = ""/**填写自定义cookie名称，ios可通过脚本自动获取 */ || cookieVal.cookieName;
 const autoLocation = false /**自动获取位置信息，ios若已安装boxjs请在boxjs中修改,未安装boxjs的和其他用户直接修改即可false表示关闭,true表示开启 */ || $laoxin.getdata("wzxy_autoLocation");
+const autoLogin = false /**通过账号密码登录，ios若已安装boxjs请在boxjs中修改,未安装boxjs的和其他用户直接修改即可false表示关闭,true表示开启 */  || $laoxin.getdata("wzxy_autoLogin")
+let cookieVal = $laoxin.getjson(cookieKey);
+// 方式1:填写JWSESSION和cookieName(cookieName可随意填写)
+let JWSESSION = ""/**JWSESSION填写处，抓包获取，ios请使用cookie脚本自动获取*/ || cookieVal.JWSESSION;
+let cookieName = ""/**填写自定义cookie名称，ios可通过脚本自动获取 */ || cookieVal.cookieName;
+// 方式2:填写用户名和密码
+const user = {
+    username : "" || $laoxin.getdata("wzxy_username"),
+    password : "" || $laoxin.getdata("wzxy_password")
+}
+
 /**
  *  *****************答案填写说明********************
  *                                                *
@@ -55,14 +63,17 @@ let data_answers = {
     areacode: "" || $laoxin.getdata("wzxy_areacode")          // 区域代码
 };
 let reg_count = NaN;
-if (!cookieKey) {
-    $laoxin.msg($laoxin.name, `🔈请先获取cookie后在运行脚本`, "【提示】请打开我在校园小程序--\"我的\"重新获取!");
+if (!(JWSESSION ||( user.username && user.password))) {
+    $laoxin.msg($laoxin.name, `🔈请先获取cookie(或者填写账号密码)后再运行脚本`, "【提示】请打开我在校园小程序--\"我的\"重新获取!(或脚本里填写密码)");
     $laoxin.done();
 } else {
     start();
 }
 
 function start() {
+    if (autoLogin) {
+        login();
+    }
     if (autoLocation) {
         $laoxin.log("【log】自动获取位置信息已开启,开始获取位置信息!");
         getLocation();
@@ -78,6 +89,26 @@ function start() {
     $laoxin.log("【log】等待⏱ 1 秒后开始执行");
     setTimeout(register, 1000);
     $laoxin.log(`【log】开始执行签到任务!`);
+}
+// 登录方法
+function login(){
+    const url = `https://gw.wozaixiaoyuan.com/basicinfo/mobile/login/username?${toStringBody(user)}`;
+    const requestData = getRequestData(url);
+    $laoxin.post(requestData,(onerror,request,data) => {
+        if (onerror) {
+            $laoxin.logErr(`【log】登录失败!:${onerror}`);
+            $laoxin.msg("🔈登录失败", "请重新登录", `【提示】如一直无法登录请手动获取JWSESSION填写到脚本开头代码的JWSESSION中(ios用户可通过脚本获取)\r\n:${onerror}`);
+        }
+        const result = $laoxin.toObj(data);
+        if (result || result.code == 0) {
+            JWSESSION = result.headers['JWSESSION'];
+            cookieName = user.username;
+            $laoxin.msg("🔈登录成功", "当前用户信息:", `【记录】${cookieName}JWSESSION:${JWSESSION}`);
+            $laoxin.setjson(cookieKey,cookieVal);
+        } else {
+            $laoxin.msg("🔈登录失败", "请重新登录", `【提示】如一直无法登录请手动获取JWSESSION填写到脚本开头代码的JWSESSION中(ios用户可通过脚本获取)\r\n:${onerror}`);
+        }
+    })
 }
 
 //签到方法
