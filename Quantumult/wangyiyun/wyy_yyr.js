@@ -46,7 +46,8 @@ const reMsg = "感谢支持和意见~~";
         }
         return;
     }
-    if (cookie.length == 0) {
+
+    if (!(cookie && cookie != "")) {
         console.log($.name,"📢请打开: https://music.163.com 并登录获取cookie","nodejs用户请自行通过浏览器抓取","quanx等ios用户打开网址将自动获取");
         if (!$.isNode()) {
             $.msg($.name,"📢请打开: https://music.163.com 并登录获取cookie","nodejs用户请自行通过浏览器抓取","quanx等ios用户打开网址将自动获取")
