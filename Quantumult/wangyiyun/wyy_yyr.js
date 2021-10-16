@@ -36,6 +36,7 @@ const reMsg = "感谢支持和意见~~";
 !(async () => {
     // 如果不是nodejs环境执行获取ck
     if (!$.isNode() && $request.headers) {
+     $.log($.name,"运行测试");
         const cookieKey = "Cookie_wyy";
         const cookieVal = $request.headers["Cookie"];
         if ($.setval(cookieVal, cookieKey)) {
@@ -43,7 +44,9 @@ const reMsg = "感谢支持和意见~~";
             $.msg($.name,"cookie获取成功!","cookie: " + cookieVal);
         } else {
             $.log($.name,"cookie获取失败");
-        }
+        } 
+    } else {
+     $.log($.name,"运行测试");
     }
     if (!cookie) {
         console.log($.name,"📢请打开: https://music.163.com 并登录获取cookie","nodejs用户请自行通过浏览器抓取","quanx等ios用户打开网址将自动获取");
