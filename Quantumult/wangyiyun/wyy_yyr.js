@@ -52,6 +52,7 @@ const reMsg = "感谢支持和意见~~";
     await getReword();
     // 通知
     await sendNotify();
+    $.done;
     
 })()
 
