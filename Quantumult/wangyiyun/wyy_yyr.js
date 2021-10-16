@@ -8,13 +8,13 @@
  ===============配置方式=========================
  ===#quanx====
  [rewrite_local]
- https:\/\/music\.163\.com\/basicinfo\/weapi\/pl\/count* url script-request-header https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/cookie_wzxy.js
+ https:\/\/music\.163\.com\/basicinfo\/weapi\/pl\/count* url script-request-header https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wangyiyun/wyy_yyr.js
  ========================================
  [mitm]
  hostname = gw.woziaxiaoyuan.com
  ========================================
  [task_local]
- 10 10 * * * https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/wzxy_health.js, tag=我在校园健康打卡, img-url=https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/icon.jpg?raw=true, enabled=true
+ 10 10 * * * https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wangyiyun/wyy_yyr.js, tag=网易云音乐人, img-url=https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/icon.jpg?raw=true, enabled=true
  =======boxjs订阅地址=======
  https://raw.githubusercontent.com/laoxinH/MyScript/main/boxjs/laoxin.boxjs.json
  */
