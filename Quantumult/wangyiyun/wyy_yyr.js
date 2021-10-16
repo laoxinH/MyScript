@@ -38,10 +38,12 @@ const reMsg = "感谢支持和意见~~";
         if (!$.isNode()) {
             $.msg($.name,"📢请打开: https://music.163.com 并登录获取cookie","nodejs用户请自行通过浏览器抓取","quanx等ios用户打开网址将自动获取")
         }
+        $.done();
         return;
+
     }
     csrf_token = cookie.match(/__csrf=(\w)+/)[0].substring(7);
-    
+
     // 获取账户信息
     await getUserInfo();
     // 获取任务列表
@@ -52,9 +54,9 @@ const reMsg = "感谢支持和意见~~";
     await getReword();
     // 通知
     await sendNotify();
-    $.done;
+    $.done();
     return;
-    
+
 })()
 
 
@@ -76,6 +78,7 @@ async function sendNotify(){
     msg += "本次执行获得云豆: " + ($.YDCount || 0) + "; 当前总云豆: " + (($.YDCount || 0) + $.cbCount) + "\r\n";
     msg += "有些任务已经下线，但是脚本获取任务列表时任然存在，不用管！\r\n此脚本目前只是执行：登录音乐人中心、发布动态、发布主创说、回复粉丝私信四个任务，其他任务请手动执行！"
     $.msg($.name,"【通知📢】本次执行获得云豆: " + ($.YDCount || 0) + "; 当前总云豆: " + (($.YDCount || 0) + $.cbCount),msg);
+    return null;
 }
 /**
  * 领取已完成的奖励
@@ -86,6 +89,8 @@ async function getReword(){
     for (let i = 0; i < $.finishedTasks.length; i++) {
         await drawReward($.finishedTasks[i]);
     }
+    return null;
+
 }
 /**
  * 执行任务
@@ -128,6 +133,7 @@ async function runTask() {
             }
             $.doneTasks.push(unfinishedTask);
         }
+        return null;
     }
     console.log("任务执行完成!")
     console.log("【通知📢】", "刷新任务列表!");
@@ -149,6 +155,8 @@ async function getUserInfo(){
     $.artistName = userData.data.artistName;
     $.artistId = userData.data.artistId;
     console.log("【通知📢】","音乐人昵称: "+$.artistName,"当前账户云豆数量: "+ $.cbCount);
+    return null;
+
 }
 
 /**
@@ -180,6 +188,7 @@ async function getTaskInfo(){
     }
     $.unfinishedTasks = unfinishedTasks;
     $.finishedTasks = finishedTasks;
+    return null;
 
 }
 /**
