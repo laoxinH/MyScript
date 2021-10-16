@@ -133,12 +133,12 @@ async function runTask() {
             }
             $.doneTasks.push(unfinishedTask);
         }
-        return null;
+        
     }
     console.log("任务执行完成!")
     console.log("【通知📢】", "刷新任务列表!");
     await getTaskInfo();
-
+    return null;
 }
 /**
  * 获取任务账户信息
