@@ -8,7 +8,7 @@
  ===============配置方式=========================
  ===#quanx====
  [rewrite_local]
- https:\/\/music\.163\.com\/basicinfo\/weapi\/pl\/count* url script-request-header https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wangyiyun/wyy_yyr.js
+ https:\/\/music\.163\.com\/weapi\/cdns* url script-request-header https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wangyiyun/wyy_yyr.js
  ========================================
  [mitm]
  hostname = gw.woziaxiaoyuan.com
