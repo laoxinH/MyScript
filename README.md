@@ -26,8 +26,8 @@
 
 | 活动时长 | 名称                         | 脚本                                                                                                   |
 | ---- | ------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| 长期 | 我在校园签到             | [jd_crazy_joy.js](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/wzxy_health.js)       |
-| 长期 | 网易云音乐人任务             | [jd_bean_change.js](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/wyy_yyr.js)       |
+| 长期 | 我在校园签到             | [wzxy_health.js](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/wzxy_health.js)       |
+| 长期 | 网易云音乐人任务             | [wyy_yyr.js](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/wyy_yyr.js)       |
 
 
 **脚本兼容: [QuantumultX](https://apps.apple.com/us/app/quantumult-x/id1443988620), [Surge](https://apps.apple.com/us/app/surge-4/id1442620678), [Loon](https://apps.apple.com/us/app/loon/id1373567447), 小火箭, JSBox, Node.js**
