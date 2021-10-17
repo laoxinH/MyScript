@@ -48,7 +48,7 @@
 ### 方法二：iOS系统的代理软件（QuantumultX, Surge, Loon, 小火箭）
 
 
-### 赞赏码(开发维护不易,请赏杯茶水费)
+### 赞赏码(开发维护不易,请赏杯茶水费)如果你有好的想法欢迎与我联系（如果有其他脚本可以告诉我）
 <div align=center><img width="250" height="250" src="https://github.com/laoxinH/MyScript/blob/main/alpay.jpg"/></div>
 
 ### 特别感谢(排名不分先后)：
