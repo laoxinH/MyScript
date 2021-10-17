@@ -36,11 +36,14 @@ const reMsg = "感谢支持和意见~~";
     if (!(cookie && cookie != "")) {
         console.log($.name,"📢请打开: https://music.163.com 并登录获取cookie","nodejs用户请自行通过浏览器抓取","quanx等ios用户打开网址将自动获取");
         if (!$.isNode()) {
-            $.msg($.name,"📢请打开: https://music.163.com 并登录获取cookie","nodejs用户请自行通过浏览器抓取","quanx等ios用户打开网址将自动获取")
+            let opts = {
+                'open-url': 'https://music.163.com',
+                'media-url': 'https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/icon.png?raw=true'
+            }
+            $.msg($.name,"📢请打开: https://music.163.com 并登录获取cookie","点击直达网址",opts)
         }
         $.done();
         return;
-
     }
     csrf_token = cookie.match(/__csrf=(\w)+/)[0].substring(7);
     // 获取账户信息
@@ -74,6 +77,7 @@ async function sendNotify(){
     }
     msg += "本次执行获得云豆: " + ($.YDCount || 0) + "; 当前总云豆: " + (($.YDCount || 0) + $.cbCount) + "\r\n";
     msg += "有些任务已经下线，但是脚本获取任务列表时任然存在，不用管！\r\n此脚本目前只是执行：登录音乐人中心、发布动态、发布主创说、回复粉丝私信四个任务，其他任务请手动执行！"
+    msg += "laoxinH的脚本仓库地址，获取更多🔥脚本和打赏请访问：https://github.com/laoxinH/MyScript🔥\r\n💕感谢支持😊"
     $.msg($.name,"【通知📢】本次执行获得云豆: " + ($.YDCount || 0) + "; 当前总云豆: " + (($.YDCount || 0) + $.cbCount),msg);
     return null;
 }
