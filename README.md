@@ -31,7 +31,7 @@
 | 说明 | 名称                         | 脚本                                                                                                   |教程
 | ---- | ------------------------------ | -------------------------------------------------------------------------------------------------------- |---|
 | 我在校园 | 我在校园签到             | [wzxy_health.js](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/wzxy_health.js)       |暂无
-| 网易云 | 网易云音乐人任务             | [wyy_yyr.js](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/wyy_yyr.js)       |点击前往|
+| 网易云 | 网易云音乐人任务             | [wyy_yyr.js](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/wyy_yyr.js)      |已发布|
 
 
 **脚本兼容: [QuantumultX](https://apps.apple.com/us/app/quantumult-x/id1443988620), [Surge](https://apps.apple.com/us/app/surge-4/id1442620678), [Loon](https://apps.apple.com/us/app/loon/id1373567447), 小火箭, JSBox, Node.js**
@@ -43,7 +43,7 @@
 ### 方法一：云服务器、腾讯云函数等等
 
   - 需自行有云服务器，云函数等
-  - 腾讯云云函数 [网易云音乐教程](wangyi.md)（免费）
+  - 腾讯云云函数 [网易云音乐教程](Quantumult/wangyiyun/wangyi.md)（免费）
 
        
  
