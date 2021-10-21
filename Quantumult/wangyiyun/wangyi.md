@@ -54,7 +54,7 @@
 	> 建议复制一行执行一行代码(粘贴到控制台后回车执行)<br>
 	> 详细参考下图<br>
 	> 格式化后的cookie格式为MUSIC_U=xxxx;__csrf=xxxx;<br>
-	> 示例:MUSIC_U=2da45fadcea83dbe492669abdc6c26c4a1e1d6db309b58b68840353993166e004087dd3d78b6050a17a35e705925a4e6992f61dfe3f0151024f9e31;__csrf=a43e6551fb5b7978040b5b463b20;
+	> 示例:MUSIC_U=2da45fadcea83dbe492669abdc6c26c4a1e1d6db309b58b6853993166e004087dd3d78b6050a17a35e705925a4e6992f61dfe3f0151024f9e31;__csrf=a43e6551fb5b7978040b5b463b20;
 	
 	![格式化ck](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/img/%E6%A0%BC%E5%BC%8F%E5%8C%96ck.png?raw=true)
 5. 将格式化后的cookie粘贴到laoxinH_config.js文件的对应位置
@@ -65,7 +65,7 @@
 		        // 说明: 若填写cookie将直接通过cookie登录,电话号码登录将会失效(优先级:cookie > 电话登录)
 		        // 因此cookie 和 电话二选一即可
 		        // 账号密码登录目前存在问题，原因未知，强烈建议cookie登录
-		        cookie : "MUSIC_U=2da45fadcea83dbe492669abdc6c26c4a1e1d6db309b58b68840353993166e004087dd3d78b6050a17a35e705925a4e6992f61dfe3f0151024f9e31;__csrf=a43e6551fb5b7978040b5b463b20;",  // 网易云cookie填写处(注意不要有cookie结尾不能有换行获回车符号"\n"等)
+		        cookie : "MUSIC_U=2da45fadcea83dbe492669abdc6c26c4a1e1d6db309b58b688403539931004087dd3d78b6050a17a35e705925a4e6992f61dfe3f0151024f9e31;__csrf=a43e6551fb5b7978040b5b463b20;",  // 网易云cookie填写处(注意不要有cookie结尾不能有换行获回车符号"\n"等)
 		        // 请填写最简cookie：MUSIC_U=xxxxx; __csrf=xxxxxx;
 		        // 电话登录配置
 		        phone: "",    // 电话号码
