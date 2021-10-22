@@ -51,12 +51,12 @@ if (await getUserInfo()) {
         // 领取奖励
         await getReword();
     } else {
-    if ($.dont) sendMsg = "cookie已失效,请重新获取！";
-}
+        if ($.dont) sendMsg = "cookie已失效,详细信息查看任务日志，请重新获取！";
+    }
     // 通知
-    await sendNotify();
-    $.done();
-    return;
+await sendNotify();
+$.done();
+return;
 
 })();
 async function getCookie(){
@@ -69,7 +69,7 @@ async function getCookie(){
                     'open-url': 'https://music.163.com',
                     'media-url': 'https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/icon.png?raw=true'
                 }
-                $.msg($.name,"📢请打开: https://music.163.com 并登录获取cookie","点击此通知直达网址",opts)
+                $.msg($.name,"📢请打开: https://music.163.com 并登录获取cookie","点击此通知直达网址",opts);
             }
         } else {
             // cookie检查
@@ -110,8 +110,9 @@ async function getCookie(){
                 }
                 data = $.toObj(data);
                 if (data != null && data.code == 200){
-                    console.log("账号密码登录成功","昵称: " + data.nickname);
+                    console.log("账号密码登录成功","昵称: " + $.toStr(data.profile.nickname));
                     cookie = res.headers["set-cookie"] + "";
+                    cookie = cookie.match(/MUSIC_U=.+?;/) + cookie.match(/__csrf=.+?;/);
                     csrf_token = cookie.match(/__csrf=(\w)+/)[0].substring(7);
                     infoData = {csrf_token : csrf_token};
                     resolve(true);
@@ -191,7 +192,7 @@ async function runTask() {
             await getInfo("https://music.163.com/weapi/creator/user/access","签到领云豆");
             $.doneTasks.push(unfinishedTask);
             console.log("休息一下~~", "等待5秒");
-            await $.wait(5000)
+            await $.wait(5000);
         }
         if (unfinishedTask.description.indexOf("动态") != -1) {
             console.log("【通知📢】", "开始执行", unfinishedTask.description);
@@ -205,7 +206,7 @@ async function runTask() {
             await randomComment(commentMsg).catch(e=>{console.error(e)});
             $.doneTasks.push(unfinishedTask);
             console.log("休息一下~~", "等待5秒");
-            await $.wait(5000)
+            await $.wait(5000);
         }
         if (unfinishedTask.description.indexOf("私信") != -1) {
             console.log("【通知📢】", "开始执行", unfinishedTask.description);
@@ -214,12 +215,16 @@ async function runTask() {
             for (let i = 0; i < count; i++) {
                 await sendMsgRandom(reMsg);
                 console.log("休息一下~~", "等待5秒");
+                await $.wait(5000);
             }
             $.doneTasks.push(unfinishedTask);
         }
         if(unfinishedTask.description.indexOf("评论") != -1) {
             console.log("【通知📢】", "开始执行", unfinishedTask.description);
             await reply("感谢支持和意见！");
+            $.doneTasks.push(unfinishedTask);
+            console.log("休息一下~~", "等待5秒");
+            await $.wait(5000);
         }
 
 
@@ -292,64 +297,35 @@ async function getTaskInfo(){
  * @returns {Promise<void>}
  */
 async function reply(replyMsg){
-    let list = [];
-    let id = [];
-    for (let i = 0; i < 6; i++) {
-        // 生成回复列表
-        console.log("第" + (i + 1) + "次尝试随机抽取歌曲评论");
-        let data = await replyList();
-        if (data.replyList.length < 6) {
-            console.log("歌曲: " + data.musicName,"评论数不足5条","尝试获取其他歌曲评论");
-            for (let replyListElement of data.replyList) {
-                if (id.indexOf(replyListElement.cid) == -1 ){
-                    id.push(replyListElement.cid);
-                    list.push(replyListElement);
-                }
-            }
-            if (list.length > 5) break;
+    let reply = await replyList();
+    let list = reply.replyList;
+    let index = Math.round(Math.random()*(list.length - 1));
+    let listElement = list[index];
+
+   // console.log(list)
+    let url = "https://music.163.com/weapi/v1/resource/comments/reply";
+    let data = {
+        checkToken: checkToken,
+        commentId: listElement.cid,
+        content: replyMsg,
+        csrf_token: csrf_token,
+        threadId: "R_SO_4_" + listElement.mid
+    }
+
+    await $.post(getOpts(data,url),(err,res,data)=>{
+        if (err){
+            $.logErr(err);
+            console.log("【错误❌】", "歌曲：" + reply.musicName,listElement.name + "的评论回复失败！","原因：" + err);
+        }
+        data = $.toObj(data);
+        if (data != null && data.code == 200){
+            console.log("歌曲：" + reply.musicName,listElement.name + "的评论回复成功！","内容: " + replyMsg);
         } else {
-            console.log("歌曲: " + data.musicName,"评论数达到任务要求","开始执行回复评论任务!");
-            list = data.replyList;
-            break;
+            $.logErr("失败");
+            console.log("【错误❌】", "歌曲：" + reply.musicName,listElement.name + "的评论回复成功！", "原因：" + $.toStr(data));
         }
-
-
-    }
-    //console.log(list)
-    if (list.length < 5 )  {
-        console.log("尝试6次后任然无法满足任务要求","放弃执行回复评论任务");
-        return null;
-    } else {
-        console.log("获取的评论总数: " + list.length,"满足任务需求!","开始执行任务!");
-        for (let listElement of list) {
-            console.log("等待5秒！")
-            await $.wait(5000);
-            let url = "https://music.163.com/weapi/v1/resource/comments/reply";
-            let data = {
-                checkToken: checkToken,
-                commentId: listElement.cid,
-                content: replyMsg,
-                csrf_token: csrf_token,
-                threadId: "R_SO_4_" + listElement.mid
-            }
-
-            await $.post(getOpts(data,url),(err,res,data)=>{
-                if (err){
-                    $.logErr(err);
-                    console.log("【错误❌】", listElement.name + "的评论回复失败！","原因：" + err);
-                }
-                data = $.toObj(data);
-                if (data != null && data.code == 200){
-                    console.log(listElement.name + "的评论回复成功！","内容: " + replyMsg);
-                } else {
-                    $.logErr("失败");
-                    console.log("【错误❌】", listElement.name + "的评论回复成功！", "原因：" + $.toStr(data));
-                }
-            })
-        }
-    return true;
-    }
-
+    })
+    return null;
 }
 
 /**
@@ -360,10 +336,8 @@ async function replyList(){
     let commentData = await myRandomComments();
     let list = commentData.data.data.comments;
     let replyList = [];
-    let id = [];
     for (let listElement of list) {
-        if (id.indexOf(listElement.user.userId) == -1) {
-            id.push(listElement.user.userId);
+
             let user = {
                 name:listElement.user.nickname,
                 cid : listElement.commentId,
@@ -372,9 +346,8 @@ async function replyList(){
                 mname:commentData.musicName
             }
             replyList.push(user);
-        }
-    }
 
+    }
     return {
         musicName : commentData.musicName,
         replyList : replyList
