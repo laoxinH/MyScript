@@ -25,7 +25,7 @@
 > wyy_yyr.js---网易云音乐人任务脚本(位置:你解压的目录/Quantumult/wangyiyun/wyy_yyr.js)<br>
 
 ![code1.png](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/img/%E7%9B%AE%E5%BD%95%E5%B1%95%E7%A4%BA1.png?raw=true)
-### 4.建立index.js并抓取cookie
+### 4.建立index.js并抓取cookie（账号登录已修复可以通过账号登录跳过抓取cookie）
 > 由于账号密码登录存在问题,暂时通过cookie登录
 
 1. 在上面的script目录建立index.js文件并添加以下代码
@@ -40,6 +40,10 @@
 		  delete require.cache[require.resolve('./wyy_yyr.js')];
 		  require('./wyy_yyr.js'); //这里写你想要的脚本
 		}
+**账号登录**
+> 账号登录已修复<br>
+> 在laoxinH_config.js中填写即可<br>
+> 若使用账号密码登录直接跳过获取cookie部分
 
 2. 前往[网易云音乐(点击直达)](https://music.163.com)获取cookie(推荐使用edge或者chrome浏览器)
 3. 登录后按F12打开复制cookie(以chrome为例)
