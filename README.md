@@ -54,7 +54,7 @@
 ### 赞赏码(开发维护不易,请赏杯茶水费)
 <div align=center><img width="250" height="250" src="https://github.com/laoxinH/MyScript/blob/main/alpay.jpg"/></div>
 
-### 如果你有好的想法欢迎与我联系（如果有其他脚本需要编写可以告诉我，当然不一定会写哦，这就看我有空没有啦~
+### 如果你有好的想法欢迎与我联系（如果有其他脚本需要编写可以[提交Issues](https://github.com/laoxinH/MyScript/issues)告诉我，当然不一定会写哦，这就看我有空没有啦~
 
 ### 特别感谢(排名不分先后)：
 * [@chavyleung](https://github.com/chavyleung)
