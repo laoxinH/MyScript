@@ -25,11 +25,9 @@
 > wyy_yyr.js---网易云音乐人任务脚本(位置:你解压的目录/Quantumult/wangyiyun/wyy_yyr.js)<br>
 
 ![code1.png](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/img/%E7%9B%AE%E5%BD%95%E5%B1%95%E7%A4%BA1.png?raw=true)
-### 3.建立index.js并抓取cookie（账号登录已修复可以通过账号登录跳过抓取cookie）
-> 由于账号密码登录存在问题,暂时通过cookie登录
+### 3.建立index.js并抓取cookie（账号登录已修复可以通过账号登录跳过抓取cookie）<a id="index"></a>
 
-1. 在上面的script目录建立index.js文件并添加以下代码
-
+1. 在上面的script目录新建index.js文件并添加以下代码（使用自带的文本编辑器即可）
 
 		exports.main_handler = async (event, context, callback) => {
 		  // 解决云函数热启动问题
@@ -43,8 +41,9 @@
 **账号登录**
 > 账号登录已修复<br>
 > 在laoxinH_config.js中填写即可<br>
-> 若使用账号密码登录直接跳过获取cookie（获取cookie对应本部部分2，3，4步）并参考第5步<br>
-> 将粘贴cookie修改为填写电话和密码
+> 若使用账号密码登录直接跳过获取cookie（获取cookie对应本部部分2，3，4步）<br>
+> 将第5步的将粘贴cookie改为填写电话和密码<br>
+**[点击跳过获取cookie](#zuizhong)**
 
 		module.exports = {
 		    wangyi : {
@@ -92,7 +91,7 @@
 		    }
 		}
 
-	>最终目录展示 
+	>最终目录展示 <a id="zuizhong"></a>
 	
 	![最终目录](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/img/%E7%9B%AE%E5%BD%95%E5%B1%95%E7%A4%BA2.png?raw=true)
 
@@ -116,7 +115,7 @@
 4. 下拉网页找到 **触发器配置**
 	> 创建触发器勾选自定义创建<br>
 	> 触发周期选择自定义触发周期<br>
-	> Cron表达式填写 10 10 * * *<br>
+	> Cron表达式填写 10 10 * * *（表示每天10.10分执行，可自行修改，修改方法百度cron表达式）<br>
 
 	*其他使用默认即可*
 
@@ -132,7 +131,7 @@
 **添加新脚本(如果以后还会有网易云脚本的话)**
 
 > 将新脚本上传到云函数目录(具体方法百度,不在赘述)<br>
-> 参考第4部分的创建index.js<br>
+> 并按照[第三部](#index)分将脚本添加到index.js<br>
 
 **脚本更新说明**
 
