@@ -7,7 +7,7 @@
 	发主创说
 
 ----------
-**通知配置请查看[其他说明](https://github.com/laoxinH/MyScript/edit/main/Quantumult/wangyiyun/wangyi.md#其他说明)**
+**通知配置请查看[其他说明](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/wangyi.md#其他说明)**
 ### 1.下载依赖和脚本代码
 
 	
