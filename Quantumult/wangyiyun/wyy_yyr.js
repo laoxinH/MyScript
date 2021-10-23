@@ -156,7 +156,7 @@ async function sendNotify(){
     }
     sendMsg += "本次执行获得云豆: " + ($.YDCount || 0) + "; 当前总云豆: " + (($.YDCount || 0) + $.cbCount) + "\r\n";
     sendMsg += "有些任务已经下线，但是脚本获取任务列表时任然存在，不用管！\r\n此脚本目前只是执行：登录音乐人中心、发布动态、发布主创说、回复粉丝私信、回复粉丝评论五个任务，其他任务请手动执行！";
-    sendMsg += "laoxinH的脚本仓库地址，获取更多🔥脚本和打赏请访问：https://github.com/laoxinH/MyScript🔥\r\n💕感谢支持😊"
+    sendMsg += "laoxinH的脚本仓库地址，获取更多🔥脚本和打赏请访问：https://github.com/laoxinH/MyScript\r\n💕感谢支持😊"
     if (isPhone) {
         $.msg($.name,"【通知📢】本次执行获得云豆: " + ($.YDCount || 0) + "; 当前总云豆: " + (($.YDCount || 0) + $.cbCount),sendMsg);
     } else {
@@ -301,8 +301,6 @@ async function reply(replyMsg){
     let list = reply.replyList;
     let index = Math.round(Math.random()*(list.length - 1));
     let listElement = list[index];
-
-   // console.log(list)
     let url = "https://music.163.com/weapi/v1/resource/comments/reply";
     let data = {
         checkToken: checkToken,
@@ -312,20 +310,25 @@ async function reply(replyMsg){
         threadId: "R_SO_4_" + listElement.mid
     }
 
-    await $.post(getOpts(data,url),(err,res,data)=>{
-        if (err){
-            $.logErr(err);
-            console.log("【错误❌】", "歌曲：" + reply.musicName,listElement.name + "的评论回复失败！","原因：" + err);
-        }
-        data = $.toObj(data);
-        if (data != null && data.code == 200){
-            console.log("歌曲：" + reply.musicName,listElement.name + "的评论回复成功！","内容: " + replyMsg);
-        } else {
-            $.logErr("失败");
-            console.log("【错误❌】", "歌曲：" + reply.musicName,listElement.name + "的评论回复成功！", "原因：" + $.toStr(data));
-        }
+    return new Promise(resolve => {
+        $.post(getOpts(data,url),(err,res,data)=>{
+            if (err){
+                $.logErr(err);
+                console.log("【错误❌】", "歌曲：" + reply.musicName,listElement.name + "的评论回复失败！","原因：" + err);
+                resolve(false);
+            }
+            data = $.toObj(data);
+            if (data != null && data.code == 200){
+                console.log("歌曲：" + reply.musicName,listElement.name + "的评论回复成功！","内容: " + replyMsg);
+                resolve(true);
+            } else {
+                $.logErr("失败");
+                console.log("【错误❌】", "歌曲：" + reply.musicName,listElement.name + "的评论回复成功！", "原因：" + $.toStr(data));
+                resolve(false);
+            }
+        })
     })
-    return null;
+
 }
 
 /**
@@ -337,7 +340,6 @@ async function replyList(){
     let list = commentData.data.data.comments;
     let replyList = [];
     for (let listElement of list) {
-
             let user = {
                 name:listElement.user.nickname,
                 cid : listElement.commentId,
@@ -346,7 +348,6 @@ async function replyList(){
                 mname:commentData.musicName
             }
             replyList.push(user);
-
     }
     return {
         musicName : commentData.musicName,
