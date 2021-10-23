@@ -7,7 +7,7 @@
 	发主创说
 
 ----------
-**通知配置请下拉查看其他配置**
+**通知配置请查看[其他说明](其他说明)**
 ### 1.下载依赖和脚本代码
 
 	
@@ -15,7 +15,7 @@
 - [前往下载脚本](https://github.com/laoxinH/MyScript)*下载方式参考下图*（下载后的文件名：MyScript-main.zip）
 ![code.png](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/img/%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD.png?raw=true)
 
-### 3.建立脚本目录
+### 2.建立脚本目录
 1. 找一个位置建立script文件夹*（文件夹名字随意）*
 2. 将之前下载的依赖解压到新建的文件夹
 3. 将下载的脚本解压，找到**sendNotify.js** | **laoxinH_config.js** | **wyy_yyr.js**
@@ -25,7 +25,7 @@
 > wyy_yyr.js---网易云音乐人任务脚本(位置:你解压的目录/Quantumult/wangyiyun/wyy_yyr.js)<br>
 
 ![code1.png](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/img/%E7%9B%AE%E5%BD%95%E5%B1%95%E7%A4%BA1.png?raw=true)
-### 4.建立index.js并抓取cookie（账号登录已修复可以通过账号登录跳过抓取cookie）
+### 3.建立index.js并抓取cookie（账号登录已修复可以通过账号登录跳过抓取cookie）
 > 由于账号密码登录存在问题,暂时通过cookie登录
 
 1. 在上面的script目录建立index.js文件并添加以下代码
@@ -43,7 +43,22 @@
 **账号登录**
 > 账号登录已修复<br>
 > 在laoxinH_config.js中填写即可<br>
-> 若使用账号密码登录直接跳过获取cookie部分
+> 若使用账号密码登录直接跳过获取cookie（获取cookie对应本部部分2，3，4步）并参考第5步<br>
+> 将粘贴cookie修改为填写电话和密码
+
+		module.exports = {
+		    wangyi : {
+		        // 说明: 若填写cookie将直接通过cookie登录,电话号码登录将会失效(优先级:cookie > 电话登录)
+		        // 因此cookie 和 电话二选一即可
+		        // 账号密码登录目前存在问题，原因未知，强烈建议cookie登录
+		        cookie : "",  // 网易云cookie填写处(注意不要有cookie结尾不能有换行获回车符号"\n"等)
+		        // 请填写最简cookie：MUSIC_U=xxxxx; __csrf=xxxxxx;
+		        // 电话登录配置
+		        phone: "188888888888",    // 电话号码
+		        password: "qweerrttt", // 密码
+		    }
+		}
+
 
 2. 前往[网易云音乐(点击直达)](https://music.163.com)获取cookie(推荐使用edge或者chrome浏览器)
 3. 登录后按F12打开复制cookie(以chrome为例)
@@ -81,7 +96,7 @@
 	
 	![最终目录](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/img/%E7%9B%AE%E5%BD%95%E5%B1%95%E7%A4%BA2.png?raw=true)
 
-### 5.登录腾讯云函数上传代码
+### 4.登录腾讯云函数上传代码
 1. [点击前往](https://console.cloud.tencent.com/scf)腾讯云函数
 2. 选择  函数服务>>新建
 	> 参考下图
