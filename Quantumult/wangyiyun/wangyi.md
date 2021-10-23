@@ -3,12 +3,11 @@
 #### 感谢支持和建议，欢迎[打赏](https://github.com/laoxinH/MyScript#赞赏码开发维护不易请赏杯茶水费)
 >目前能执行的任务列表
 
-	每日登录
-	发布动态
-	回复私信
-	回复评论
-	发主创说
-
+- [x] 每日登录
+- [x] 发布动态
+- [x] 回复私信
+- [x] 回复评论
+- [x] 发主创说
 ----------
 **通知配置请查看[其他说明](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/wangyi.md#其他说明)**
 ### 1.下载依赖和脚本代码
@@ -43,10 +42,10 @@
 		}
 **账号登录**
 > 账号登录已修复<br>
-> 在laoxinH_config.js中填写即可<br>
-> 若使用账号密码登录直接跳过获取cookie（获取cookie对应本部部分2，3，4步）<br>
-> 将第5步的将粘贴cookie改为填写电话和密码<br>
-**[点击跳过获取cookie](#zuizhong)**
+> 在laoxinH_config.js中填写即可（将第5步的粘贴cookie改为填写电话和密码）<br>
+> 若使用账号密码登录直接跳过获取cookie（获取cookie对应本部分的2，3，4步）<br>
+> 下面为修改好的示例代码
+
 
 		module.exports = {
 		    wangyi : {
@@ -60,7 +59,7 @@
 		        password: "qweerrttt", // 密码
 		    }
 		}
-
+**在laoxinH_config.js填写好点账号密码后[击跳过获取cookie](#zuizhong)**
 
 2. 前往[网易云音乐(点击直达)](https://music.163.com)获取cookie(推荐使用edge或者chrome浏览器)
 3. 登录后按F12打开复制cookie(以chrome为例)
