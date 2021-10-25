@@ -1,7 +1,7 @@
 /**
  * 网易云音乐人
  * @author: github@laoxinH
- * @version: 1.0
+ * @version: 2.0
  * 每天10点10分执行任务，如有需要请自行修改cron表达式
  ==============cookie获取方式===================
  打开我在校园微信小程序--"我的",脚本将会自动获取,当看到通知获取成功时即可
@@ -40,6 +40,7 @@ const reMsg = "感谢支持和意见~~";
         sendMsg = "cookie格式有误或者无法通过账号密码获取cookie，详细请查看脚本日志！";
         console.log($.name,"无法获取cookie，请查看日志！","执行结束!");
     } else {
+        console.log()
         $.dont  = true;
     }
 // 执行任务
@@ -157,13 +158,10 @@ async function sendNotify(){
     sendMsg += "本次执行获得云豆: " + ($.YDCount || 0) + "; 当前总云豆: " + (($.YDCount || 0) + $.cbCount) + "\r\n";
     sendMsg += "有些任务已经下线，但是脚本获取任务列表时任然存在，不用管！\r\n此脚本目前只是执行：登录音乐人中心、发布动态、发布主创说、回复粉丝私信、回复粉丝评论五个任务，其他任务请手动执行！";
     sendMsg += "laoxinH的脚本仓库地址，获取更多🔥脚本和打赏请访问：https://github.com/laoxinH/MyScript\r\n💕感谢支持😊"
-    if (isPhone) {
-        $.msg($.name,"【通知📢】本次执行获得云豆: " + ($.YDCount || 0) + "; 当前总云豆: " + (($.YDCount || 0) + $.cbCount),sendMsg);
-    } else {
+    $.msg($.name,"【通知📢】本次执行获得云豆: " + ($.YDCount || 0) + "; 当前总云豆: " + (($.YDCount || 0) + $.cbCount),sendMsg);
+    if (!isPhone) {
         require("./sendNotify").sendNotify($.name,sendMsg);
     }
-
-
     return null;
 }
 /**
@@ -189,7 +187,7 @@ async function runTask() {
     for (let unfinishedTask of $.unfinishedTasks) {
         if (unfinishedTask.description.indexOf("登录") != -1) {
             console.log("【通知📢】", "开始执行", unfinishedTask.description);
-            await getInfo("https://music.163.com/weapi/creator/user/access","签到领云豆");
+            await getInfo("https://music.163.com/weapi/creator/user/access","签到领云豆").catch(e=>{console.error(e)});
             $.doneTasks.push(unfinishedTask);
             console.log("休息一下~~", "等待5秒");
             await $.wait(5000);
@@ -213,7 +211,7 @@ async function runTask() {
             let count = unfinishedTask.targetCount - unfinishedTask.progressRate;
             console.log("已完成回复数量: " + unfinishedTask.progressRate, "还需回复: " + (unfinishedTask.targetCount - unfinishedTask.progressRate));
             for (let i = 0; i < count; i++) {
-                await sendMsgRandom(reMsg);
+                await sendMsgRandom(reMsg).catch(e=>{console.error(e)});
                 console.log("休息一下~~", "等待5秒");
                 await $.wait(5000);
             }
@@ -221,7 +219,7 @@ async function runTask() {
         }
         if(unfinishedTask.description.indexOf("评论") != -1) {
             console.log("【通知📢】", "开始执行", unfinishedTask.description);
-            await reply("感谢支持和意见！");
+            await reply("感谢支持和意见！").catch(e=>{console.error(e)});
             $.doneTasks.push(unfinishedTask);
             console.log("休息一下~~", "等待5秒");
             await $.wait(5000);
@@ -481,7 +479,7 @@ async function randomComment(msg){
  */
 async function sendMsgRandom(msg){
     // 获取私信列表
-    let  msgList = await getInfo("https://music.163.com/weapi/msg/private/users");
+    let msgList = await getInfo("https://music.163.com/weapi/msg/private/users","获取私信列表");
     let index = Math.round(Math.random()*(msgList.msgs.length-1));
     let userId = msgList.msgs[index].fromUser.userId;
     let data = {
