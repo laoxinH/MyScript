@@ -1,8 +1,9 @@
 ## 🎵网易云音乐腾讯云函数教程
 #### 目前仓库发布仅有网易云音乐人任务脚本,后续将会发布更多脚本（如果有什么有趣的脚本需要编写请提交[Issues](https://github.com/laoxinH/MyScript/issues)）
 #### 感谢支持和建议，欢迎[打赏](https://github.com/laoxinH/MyScript#赞赏码开发维护不易请赏杯茶水费)
->目前能执行的任务列表，简单说明一下，任务都是周任务，像发布动态回复评论这种任务不会一次性执行完。跑一次脚本执行一次。所以别问为啥没执行完
+>目前完成的功能，简单说明一下，任务都是周任务，像发布动态回复评论这种任务不会一次性执行完。跑一次脚本执行一次。所以别问为啥没执行完
 
+- [x] 多账号支持
 - [x] 每日登录
 - [x] 发布动态
 - [x] 回复私信
@@ -40,26 +41,55 @@
 		  delete require.cache[require.resolve('./wyy_yyr.js')];
 		  require('./wyy_yyr.js'); //这里写你想要的脚本
 		}
-**账号登录**
+**账号登录（若账号登录存在问题请使用cookie登录）**
 > 账号登录已修复<br>
 > 在laoxinH_config.js中填写即可（将第5步的粘贴cookie改为填写电话和密码）<br>
 > 若使用账号密码登录直接跳过获取cookie（获取cookie对应本部分的2，3，4步）<br>
-> 下面为修改好的示例代码
+> 下面为修改好的示例代码<br>
+> 多账号参考账号1和脚本注释填写即可
 
 
-		module.exports = {
-		    wangyi : {
-		        // 说明: 若填写cookie将直接通过cookie登录,电话号码登录将会失效(优先级:cookie > 电话登录)
-		        // 因此cookie 和 电话二选一即可
-		        // 账号密码登录目前存在问题，原因未知，强烈建议cookie登录
-		        cookie : "",  // 网易云cookie填写处(注意不要有cookie结尾不能有换行获回车符号"\n"等)
-		        // 请填写最简cookie：MUSIC_U=xxxxx; __csrf=xxxxxx;
-		        // 电话登录配置
-		        phone: "188888888888",    // 电话号码
-		        password: "qweerrttt", // 密码
-		    }
-		}
+			module.exports = {
+			    // 网易云相关配置
+			    wangyi: {
+			        // 不填写则使用默认回复
+			        shareMsg: "",               // 发送动态的文字内容
+			        commentMsg: "",             // 主创说评论内容
+			        reMsg: "",                  // 私信内容
+			        reCommentMsg: "",           // 回复评论内容
+			        users: [
+			            {
+			                // 账号一
+			                // 说明: 若填写cookie将直接通过cookie登录,电话号码登录将会失效(优先级:cookie > 电话登录)
+			                // 因此cookie 和 电话二选一即可
+			                // 账号密码登录可能有问题，原因异地登陆，若出现问题请使用cookie登录
+			                cookie: "",
+			                // 请填写最简cookie：MUSIC_U=xxxxx; __csrf=xxxxxx;
+			                // 电话登录配置
+			                phone: "188888888888",    // 电话号码
+			                password: "qweerrttt", // 密码
+			            },
+			            {
+			                // 账号二
+			                cookie: "",
+			                phone: "",
+			                password: ""
+			            }
+			            /**
+			             * 若需要添加更多账号请自行添加以下内容，注意每一个{}之间有英文逗号“,”分割
+			             {
+			                cookie: "",
+			                phone: "",
+			                password: ""
+			            }
+			             */
+			        ]
+			    }
+			}
+			
 **在laoxinH_config.js填写好点账号密码后[击跳过获取cookie](#zuizhong)**
+
+**以下为通过cookie方式登录（推荐）**
 
 2. 前往[网易云音乐(点击直达)](https://music.163.com)获取cookie(推荐使用edge或者chrome浏览器)
 3. 登录后按F12打开复制cookie(以chrome为例)
@@ -78,20 +108,47 @@
 	
 	![格式化ck](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/img/%E6%A0%BC%E5%BC%8F%E5%8C%96ck.png?raw=true)
 5. 将格式化后的cookie粘贴到laoxinH_config.js文件的对应位置
-	> 粘贴后代码示例如下
+	> 粘贴后代码示例如下<br>
+	> 多账号参考账号1和脚本注释填写即可
 	
-		module.exports = {
-		    wangyi : {
-		        // 说明: 若填写cookie将直接通过cookie登录,电话号码登录将会失效(优先级:cookie > 电话登录)
-		        // 因此cookie 和 电话二选一即可
-		        // 账号密码登录目前存在问题，原因未知，强烈建议cookie登录
-		        cookie : "MUSIC_U=2da45fadcea83dbe492669abdc6c26c4a1e1d6db309b58b688403539931004087dd3d78b6050a17a35e705925a4e6992f61dfe3f0151024f9e31;__csrf=a43e6551fb5b7978040b5b463b20;",  // 网易云cookie填写处(注意不要有cookie结尾不能有换行获回车符号"\n"等)
-		        // 请填写最简cookie：MUSIC_U=xxxxx; __csrf=xxxxxx;
-		        // 电话登录配置
-		        phone: "",    // 电话号码
-		        password: "", // 密码
-		    }
-		}
+				module.exports = {
+			    // 网易云相关配置
+			    wangyi: {
+			        // 不填写则使用默认回复
+			        shareMsg: "",               // 发送动态的文字内容
+			        commentMsg: "",             // 主创说评论内容
+			        reMsg: "",                  // 私信内容
+			        reCommentMsg: "",           // 回复评论内容
+			        users: [
+			            {
+			                // 账号一
+			                // 说明: 若填写cookie将直接通过cookie登录,电话号码登录将会失效(优先级:cookie > 电话登录)
+			                // 因此cookie 和 电话二选一即可
+			                // 账号密码登录可能有问题，原因异地登陆，若出现问题请使用cookie登录
+			                cookie: "MUSIC_U=2da45fadcea83dbe492669abdc6c26c4a1e1d6db309b58b688403539931004087dd3d78b6050a17a35e705925a4e6992f61dfe3f0151024f9e31;__csrf=a43e6551fb5b7978040b5b463b20;",
+			                // 请填写最简cookie：MUSIC_U=xxxxx; __csrf=xxxxxx;
+			                // 电话登录配置
+			                phone: "",    // 电话号码
+			                password: "", // 密码
+			            },
+			            {
+			                // 账号二
+			                cookie: "",
+			                phone: "",
+			                password: ""
+			            }
+			            /**
+			             * 若需要添加更多账号请自行添加以下内容，注意每一个{}之间有英文逗号“,”分割
+			             {
+			                cookie: "",
+			                phone: "",
+			                password: ""
+			            }
+			             */
+			        ]
+			    }
+			}
+
 
 	>最终目录展示 <a id="zuizhong"></a>
 	
