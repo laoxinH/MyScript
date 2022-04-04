@@ -30,7 +30,7 @@
 
 ![code1.png](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/img/%E7%9B%AE%E5%BD%95%E5%B1%95%E7%A4%BA1.png?raw=true)
 ### 3.建立index.js并抓取cookie（账号登录已修复可以通过账号登录跳过抓取cookie）<a id="index"></a>
-
+#### 同时复制浏览器的UA备用
 1. 在上面的script目录新建index.js文件并添加以下代码（使用自带的文本编辑器即可）
 
 		exports.main_handler = async (event, context, callback) => {
