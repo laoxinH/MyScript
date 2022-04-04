@@ -58,3 +58,6 @@
 
 ### 特别感谢(排名不分先后)：
 * [@chavyleung](https://github.com/chavyleung)
+
+### 更新说明
+***2022-4-4   修复网易云脚本***
