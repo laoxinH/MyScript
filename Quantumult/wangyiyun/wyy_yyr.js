@@ -1,7 +1,7 @@
 /**
  * 网易云音乐人
  * @author: github@laoxinH
- * @version: 2.1
+ * @version: 2.2
  * 每天10点10分执行任务，如有需要请自行修改cron表达式
  ==============cookie获取方式===================
  打开我在校园微信小程序--"我的",脚本将会自动获取,当看到通知获取成功时即可
@@ -236,7 +236,7 @@ async function doTask() {
             console.log("休息一下~~", "等待10秒");
             await $.wait(10000);
         }
-        if (unfinishedTask.description.indexOf("评论") != -1) {
+        if (unfinishedTask.description.indexOf("云圈") != -1) {
             await doViewMyCircle().catch(e=>{console.error(e)});
             $.doneTasks.push(unfinishedTask);
             console.log("休息一下~~", "等待10秒");
