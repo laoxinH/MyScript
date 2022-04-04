@@ -10,8 +10,9 @@
 - [x] 回复评论
 - [x] 发主创说
 - [x] 访问云圈
-----------
-**通知配置请查看[其他说明](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/wangyi.md#其他说明)**
+---------- 
+**前往此处观看体验更佳  [云函数教程](https://www.laoxin.top/index.php/2022/04/04/ncmusiciancloud/)**  
+**[Quantumult教程](https://www.laoxin.top/index.php/2022/04/04/ncmusicianqx/)**
 ### 1.下载依赖和脚本代码
 
 	
