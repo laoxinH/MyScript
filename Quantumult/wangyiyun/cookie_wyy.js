@@ -1,11 +1,14 @@
 // 此脚本用于获取网易云cookie
 const $ = new Env("网易云cookie");
+
 !(async () => {
     if (!$.getval("Cookie_wyy") || $.getval("Cookie_wyy") == "") {
         if ($request.headers["Cookie"].indexOf("__csrf") == -1) return;
         const cookieKey = "Cookie_wyy";
         const cookieVal = $request.headers["Cookie"];
+        const UA = $request.headers["User-Agent"]
         if ($.setval(cookieVal, cookieKey)) {
+            $.setval(UA,"UA");
             $.log($.name,"cookie获取成功",cookieVal);
             $.msg($.name,"cookie获取成功!","cookie: " + cookieVal);
         } else {
