@@ -9,11 +9,11 @@ module.exports = {
         users: [
             {
                 // 账号一
-                // 说明: 若填写cookie将直接通过cookie登录,电话账号登录将会失效(优先级:cookie > 账号登录)
-                // 因此cookie 和 电话二选一即可(推荐cookie登录)
-                cookie: "MUSIC_U=2da45fadcea83dbe492669abdc6c2690d89fdfb5c377e5a9e548218dd27afef3993166e004087dd3d78b6050a17a35e705925a4e6992f61d07c385928f88e8de;__csrf=6d4b52f2c55af05556fa31d913134659;",
-                phone: "18382750609",
-                password: "laoxin0318",
+                // 说明: 优先级:cookie > 账号登录
+                // cookie失效 将会通过账号登陆(推荐cookie登录)
+                cookie: "MUSIC_U=2da45fadcebe492669abdc6c2690d89fdfb5c377e5a9e548218dd27afef3993166e004087dd3d78b6050a17a35e705925a4e6992f61d07c385928f88e8de;__csrf=6d4b52f2c55af05556fa31d913134659;",
+                phone: "",
+                password: "",
                 // UA推荐填写自己浏览器UA,防止大量UA相同出现错误
                 UA:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.37 Edg/99.0.1150.55",
 
