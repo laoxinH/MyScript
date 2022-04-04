@@ -49,6 +49,7 @@
  
 
 ### 方法二：iOS系统的代理软件（QuantumultX, Surge, Loon, 小火箭）
+  - 圈x教程 [网易云音乐Quantumult教程](https://www.laoxin.top/index.php/2022/04/04/ncmusicianqx/)（免费）
 
 
 ### 赞赏码(开发维护不易,请赏杯茶水费)
@@ -60,4 +61,5 @@
 * [@chavyleung](https://github.com/chavyleung)
 
 ### 更新说明
-***2022-4-4   修复网易云脚本***
+***2022-4-4   重构网易云脚本***
+  
