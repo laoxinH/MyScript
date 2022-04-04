@@ -9,6 +9,7 @@
 - [x] 回复私信
 - [x] 回复评论
 - [x] 发主创说
+- [x] 访问云圈
 ----------
 **通知配置请查看[其他说明](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/wangyi.md#其他说明)**
 ### 1.下载依赖和脚本代码
@@ -21,10 +22,10 @@
 ### 2.建立脚本目录
 1. 找一个位置建立script文件夹*（文件夹名字随意）*
 2. 将之前下载的依赖解压到新建的文件夹
-3. 将下载的脚本解压，找到**sendNotify.js** | **laoxinH_config.js** | **wyy_yyr.js**
+3. 将下载的脚本解压，找到**sendNotify.js** | **wyy_config.js** | **wyy_yyr.js**
 
 > sendNotify.js---发送通知的脚本（位置：你解压的目录/sendNotify.js）<br>
-> laoxinH_config.js---本仓库配置文件脚本（位置：你解压的目录/laoxinH_config.js）<br>
+> wyy_config.js---网易云配置文件（位置：你解压的目录/Quantumult/wangyiyun/wyy_config.js）<br>
 > wyy_yyr.js---网易云音乐人任务脚本(位置:你解压的目录/Quantumult/wangyiyun/wyy_yyr.js)<br>
 
 ![code1.png](https://github.com/laoxinH/MyScript/blob/main/Quantumult/wangyiyun/img/%E7%9B%AE%E5%BD%95%E5%B1%95%E7%A4%BA1.png?raw=true)
@@ -64,30 +65,33 @@
 			                // 因此cookie 和 电话二选一即可
 			                // 账号密码登录可能有问题，原因异地登陆，若出现问题请使用cookie登录
 			                cookie: "",
-			                // 请填写最简cookie：MUSIC_U=xxxxx; __csrf=xxxxxx;
+			                // 建议填写最简cookie：MUSIC_U=xxxxx; __csrf=xxxxxx;
 			                // 电话登录配置
 			                phone: "188888888888",    // 电话号码
 			                password: "qweerrttt", // 密码
+					UA:"你的浏览器UA"
 			            },
 			            {
 			                // 账号二
 			                cookie: "",
 			                phone: "",
-			                password: ""
+			                password: ""，
+					UA:"你的浏览器UA"
 			            }
 			            /**
 			             * 若需要添加更多账号请自行添加以下内容，注意每一个{}之间有英文逗号“,”分割
 			             {
 			                cookie: "",
 			                phone: "",
-			                password: ""
+			                password: "",
+					UA:"你的浏览器UA"
 			            }
 			             */
 			        ]
 			    }
 			}
 			
-**在laoxinH_config.js填写好点账号密码后[击跳过获取cookie](#zuizhong)**
+**在wyy_config.js填写好点账号密码后[击跳过获取cookie](#zuizhong)**
 
 **以下为通过cookie方式登录（推荐）**
 
@@ -130,19 +134,22 @@
 			                // 电话登录配置
 			                phone: "",    // 电话号码
 			                password: "", // 密码
+					UA:"你的浏览器UA"
 			            },
 			            {
 			                // 账号二
 			                cookie: "",
 			                phone: "",
-			                password: ""
+			                password: "",
+					UA:"你的浏览器UA"
 			            }
 			            /**
 			             * 若需要添加更多账号请自行添加以下内容，注意每一个{}之间有英文逗号“,”分割
 			             {
 			                cookie: "",
 			                phone: "",
-			                password: ""
+			                password: "",
+					UA:"你的浏览器UA"
 			            }
 			             */
 			        ]
