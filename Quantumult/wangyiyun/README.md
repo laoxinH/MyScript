@@ -1,4 +1,6 @@
-## 🎵网易云音乐腾讯云函数教程
+## 🎵网易云音乐腾讯云函数教程（弃用）
+**新版教程 [云函数教程](https://www.laoxin.top/index.php/2022/04/04/ncmusiciancloud/)**  
+**[Quantumult教程](https://www.laoxin.top/index.php/2022/04/04/ncmusicianqx/)**
 #### 目前仓库发布仅有网易云音乐人任务脚本,后续将会发布更多脚本（如果有什么有趣的脚本需要编写请提交[Issues](https://github.com/laoxinH/MyScript/issues)）
 #### 感谢支持和建议，欢迎[打赏](https://github.com/laoxinH/MyScript#赞赏码开发维护不易请赏杯茶水费)
 >目前完成的功能，简单说明一下，任务都是周任务，像发布动态回复评论这种任务不会一次性执行完。跑一次脚本执行一次。所以别问为啥没执行完
@@ -11,8 +13,7 @@
 - [x] 发主创说
 - [x] 访问云圈
 ---------- 
-**前往此处观看体验更佳  [云函数教程](https://www.laoxin.top/index.php/2022/04/04/ncmusiciancloud/)**  
-**[Quantumult教程](https://www.laoxin.top/index.php/2022/04/04/ncmusicianqx/)**
+
 ### 1.下载依赖和脚本代码
 
 	
