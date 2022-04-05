@@ -11,7 +11,7 @@ module.exports = {
                 // 账号一
                 // 说明: 优先级:cookie > 账号登录
                 // cookie失效 将会通过账号登陆(推荐cookie登录)
-                cookie: "MUSIC_U=2da45fadcebe492669abdc6c2690d89fdfb5c377e5a9e548218dd27afef3993166e004087dd3d78b6050a17a35e705925a4e6992f61d07c385928f88e8de;__csrf=6d4b52f2c55af05556fa31d913134659;",
+                cookie: "MUSIC_U=2da45fadcebe492669abdc6c26d89fdfb5c377e5a9e548218dd27afef3993166e004087dd3d78b6050a17a35e705925a4e6992f61d07c385928f88e8de;__csrf=6d4b52f2c55af05556fa31d913134659;",
                 phone: "",
                 password: "",
                 // UA推荐填写自己浏览器UA,防止大量UA相同出现错误
