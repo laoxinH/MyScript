@@ -43,7 +43,7 @@
 ### 方法一：云服务器、腾讯云函数等等
 
   - 需自行有云服务器，云函数等
-  - 腾讯云云函数 [网易云音乐教程](Quantumult/wangyiyun/wangyi.md)（免费）
+  - 腾讯云云函数 [网易云音乐教程](https://www.laoxin.top/index.php/2022/04/04/ncmusiciancloud/)（免费）
 
        
  
