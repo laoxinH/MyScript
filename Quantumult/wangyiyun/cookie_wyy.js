@@ -3,7 +3,7 @@ const $ = new Env("网易云cookie");
 
 !(async () => {
     if (!$.getdata("wyy_cookie") || $.getdata("wyy_cookie") == "") {
-        if ($request.headers["Cookie"].indexOf("__csrf") == -1) return;
+        if ($request.headers["Cookie"].indexOf("__csrf") == -1 && $request.headers["Cookie"].indexOf("MUSIC_U") ==  -1) return;
         const cookieKey = "wyy_cookie";
         const cookieVal = $request.headers["Cookie"];
         const UA = $request.headers["User-Agent"]
