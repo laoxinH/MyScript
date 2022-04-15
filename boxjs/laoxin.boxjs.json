@@ -10,7 +10,8 @@
       "id": "我在校园健康签到",
       "name": "日在校园签到",
       "keys": [
-        "Cookie_wzxy"
+        "wzxy_cookie",
+        "wzxx_UA"
       ],
       "scripts": [
         {
@@ -50,7 +51,7 @@
           "name": "答案",
           "val": "",
           "type": "text",
-          "desc": "答案格式:[\"0\",\"0\",\"0\",\"2\",\"3\",\"2\"]"
+          "desc": "答案格式:[\"0\",\"0\",\"0\",\"2\",\"3\",\"无其他情况\"](0对应第一个选项,1对应第二个选项,以此类推)"
         },
         {
           "id": "wzxy_longitude",
@@ -65,55 +66,6 @@
           "val": "",
           "type": "text",
           "desc": "示列格式:106.769248"
-        },
-        {
-          "id": "wzxy_country",
-          "name": "国家",
-          "val": "中国",
-          "type": "text",
-          "desc": "示列格式:中国(默认中国)"
-        },
-        {
-          "id": "wzxy_city",
-          "name": "城市",
-          "val": "",
-          "type": "text",
-          "desc": "示列格式:北京市"
-        },
-        {
-          "id": "wzxy_district",
-          "name": "区(县)",
-          "val": "",
-          "type": "text",
-          "desc": "示列格式:高新区(安岳县)"
-        },
-        {
-          "id": "wzxy_province",
-          "name": "省",
-          "val": "",
-          "type": "text",
-          "desc": "示列格式:河南省"
-        },
-        {
-          "id": "wzxy_township",
-          "name": "街道(镇)",
-          "val": "",
-          "type": "text",
-          "desc": "示列格式:东城街道(大塘镇)"
-        },
-        {
-          "id": "wzxy_street",
-          "name": "路",
-          "val": "",
-          "type": "text",
-          "desc": "示列格式:某路(如凤阳街)"
-        },
-        {
-          "id": "wzxy_areacode",
-          "name": "地区编码",
-          "val": "",
-          "type": "text",
-          "desc": "示列格式:某路(如凤阳路)"
         }
       ],
       "author": "@laoxinH",
