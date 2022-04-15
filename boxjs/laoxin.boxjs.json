@@ -3,7 +3,7 @@
   "name": "laoxin 脚本订阅",
   "description": "BoxJS配置订阅",
   "author": "@laoxinH",
-  "icon": "https://lk.laoxinhxx.workers.dev/https://avatars.githubusercontent.com/u/53307507?s=400&u=d2e77cb0686d63791da9712eff168a068e96ab88&v=4",
+  "icon": "https://pan.laoxin.top/al1/images/header.jpg",
   "repo": "https://github.com/laoxinH/MyScript",
   "apps": [
     {
@@ -71,8 +71,8 @@
       "author": "@laoxinH",
       "repo": "https://github.com/laoxinH/MyScript",
       "icons": [
-        "https://lk.laoxinhxx.workers.dev/https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/icon.jpg?raw=true",
-        "https://lk.laoxinhxx.workers.dev/https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/icon.jpg?raw=true"
+        "https://pan.laoxin.top/al1/images/wzxy_icon.jpg",
+        "https://pan.laoxin.top/al1/images/wzxy_icon.jpg"
       ]
     },
 
