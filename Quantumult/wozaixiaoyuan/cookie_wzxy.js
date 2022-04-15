@@ -17,7 +17,7 @@ if (cookieVal) {
     const cookie = cookieVal;
     const UA = $request.headers["User-Agent"];
     if ($laoxin.setdata(cookie, cookieKey)) {
-        $laoxin.setdata(UA,"wzxx_UA");
+        $laoxin.setdata(UA,"wzxy_UA");
         $laoxin.msg(`${$laoxin.name}`, '获取JWSESSION: 成功', `cookie:${cookieVal}`, "获取成功");
         $laoxin.log(`[${$laoxin.name}] 获取JWSESSION: 成功, cookie: ${cookieVal}`);
     } else {
