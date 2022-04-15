@@ -29,7 +29,7 @@ const $ = new Env("我在校园健康打卡");
 const isPhone = !$.isNode() || $.isLoon() || $.isQuanX() || $.isSurge();  // 环境检测
 let message = "";
 // 初始化脚本
-console.log("【通知📢】", "开始初始化脚本, 当前环境 : " + (isPhone ? "手机端" : "nodejs"),"开始执行!");
+console.log("【通知📢】 开始初始化脚本, 当前环境 : " + (isPhone ? "手机端" : "nodejs"),"开始执行!");
 let JWSESSION = getData("cookie");
 let UA = getData("UA");
 
@@ -75,6 +75,10 @@ async function register() {
             township: "" || result.township,         // 街道(镇) 如东城街道(大塘镇)
             street: "" || result.street,             // 街
             areacode: "" || result.areacode          // 区域代码
+        }
+        if (isPhone){
+            data.answers = data.answers.replaceAll("\\","");
+            data.answers = data.answers.replaceAll("\"","");
         }
 
         let info = await api.save(data);
@@ -164,16 +168,6 @@ function setData(key = "",value){
     return null;
 }
 
-//https://gw.wozaixiaoyuan.com/basicinfo/mobile/login/username?username=18382750609&password=laoxin0318&openId=o0-5d1rUvXNaZ9HqrVD9-g8QogHI&unionId=oUXUs1ZLNSUVEVEY3cuHSyP-JFn4&phoneInfo=3____ipad%3B+cpu+os+14_6+like+mac+os+x
-// json序列化并编码uri
-function toStringBody(parse) {
-    //$laoxin.log("数据获取","json",JSON.stringify(parse));
-    let stringBody = "";
-    for (let key in parse) {
-        stringBody += (key + "=" + parse[key] + "&");
-    }
-    return encodeURI(stringBody.substr(0, stringBody.length - 1));
-}
 function Api(JWSESSION = "",UA = ""){
 
 return new class {
@@ -244,12 +238,14 @@ return new class {
 
     // 生成请求参数
     getRequestData(type, body = {}) {
+
         try{
             let stringBody = "";
             for (let key in body) {
                 stringBody += (key + "=" + body[key] + "&");
             }
             body =  encodeURI(stringBody.substr(0, stringBody.length - 1));
+
         } catch (e){
             // TO DO...
             console.log("参数异常");
