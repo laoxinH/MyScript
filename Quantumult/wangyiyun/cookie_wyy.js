@@ -2,20 +2,20 @@
 const $ = new Env("网易云cookie");
 
 !(async () => {
-    if (!$.getval("wyy_cookie") || $.getval("wyy_cookie") == "") {
+    if (!$.getdata("wyy_cookie") || $.getdata("wyy_cookie") == "") {
         if ($request.headers["Cookie"].indexOf("__csrf") == -1) return;
         const cookieKey = "wyy_cookie";
         const cookieVal = $request.headers["Cookie"];
         const UA = $request.headers["User-Agent"]
-        if ($.setval(cookieVal, cookieKey)) {
-            $.setval(UA,"wyy_UA");
+        if ($.setdata(cookieVal, cookieKey)) {
+            $.setdata(UA,"wyy_UA");
             $.log($.name,"cookie获取成功",cookieVal);
             $.msg($.name,"cookie获取成功!","cookie: " + cookieVal);
         } else {
             $.log($.name,"cookie获取失败");
         }
     } else {
-        $.log($.name,"当前已存在cookie",$.getval("Cookie_wyy"));
+        $.log($.name,"当前已存在cookie",$.getdata("Cookie_wyy"));
     }
     $.done();
     return;
