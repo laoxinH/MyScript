@@ -11,15 +11,13 @@
  */
 
 const $laoxin = new Env("我在校园cookie获取");
-const cookieKey = 'Cookie_wzxy';
+const cookieKey = 'wzxy_cookie';
 const cookieVal = $request.headers['JWSESSION'];  // 获取jwsession
-const autoLogin = $laoxin.getdata("wzxy_autoLogin");
 if (cookieVal) {
-    const cookie = {
-        cookieName: "未命名",
-        JWSESSION: cookieVal
-    }
-    if ($laoxin.setjson(cookie, cookieKey)) {
+    const cookie = cookieVal;
+    const UA = $request.headers["User-Agent"];
+    if ($laoxin.setdata(cookie, cookieKey)) {
+        $laoxin.setdata(UA,"wzxx_UA");
         $laoxin.msg(`${$laoxin.name}`, '获取JWSESSION: 成功', `cookie:${cookieVal}`, "获取成功");
         $laoxin.log(`[${$laoxin.name}] 获取JWSESSION: 成功, cookie: ${cookieVal}`);
     } else {
