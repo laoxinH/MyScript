@@ -1,9 +1,9 @@
 {
   "id": "laoxin.app.sub",
   "name": "laoxin 脚本订阅",
-  "description": "该订阅兼容BoxJs",
+  "description": "BoxJS配置订阅",
   "author": "@laoxinH",
-  "icon": "https://avatars.githubusercontent.com/u/53307507?s=400&u=d2e77cb0686d63791da9712eff168a068e96ab88&v=4",
+  "icon": "https://lk.laoxinhxx.workers.dev/https://avatars.githubusercontent.com/u/53307507?s=400&u=d2e77cb0686d63791da9712eff168a068e96ab88&v=4",
   "repo": "https://github.com/laoxinH/MyScript",
   "apps": [
     {
@@ -11,12 +11,12 @@
       "name": "日在校园签到",
       "keys": [
         "wzxy_cookie",
-        "wzxy_UA"
+        "wzxx_UA"
       ],
       "scripts": [
         {
           "name": "我在校园健康打卡",
-          "script": "https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/wzxy_health.js"
+          "script": "https://lk.laoxinhxx.workers.dev/https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wozaixiaoyuan/wzxy_health.js"
         }
       ],
       "settings": [
@@ -71,9 +71,99 @@
       "author": "@laoxinH",
       "repo": "https://github.com/laoxinH/MyScript",
       "icons": [
-        "https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/icon.jpg?raw=true",
-        "https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/icon.jpg?raw=true"
+        "https://lk.laoxinhxx.workers.dev/https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/icon.jpg?raw=true",
+        "https://lk.laoxinhxx.workers.dev/https://github.com/laoxinH/MyScript/blob/main/Quantumult/wozaixiaoyuan/icon.jpg?raw=true"
       ]
-    }
+    },
+
+    {
+      "id": "网易云音乐人任务",
+      "name": "音乐人赚云豆",
+      "keys": [
+        "wyy_cookie",
+        "wyy_UA"
+      ], "scripts": [
+      {
+        "name": "网易云音乐人任务",
+        "script": "https://lk.laoxinhxx.workers.dev/https://raw.githubusercontent.com/laoxinH/MyScript/main/Quantumult/wangyiyun/wyy_yyr.js"
+      }],
+      "settings":[
+        {
+          "id": "wyy_doSignInMusician",
+          "name": "是否执行音乐人签到任务",
+          "val": true,
+          "type": "boolean",
+          "desc": "开启表示执行,关闭表示不执行!"
+        },{
+          "id": "wyy_doShareBlog",
+          "name": "是否执行发布动态任务",
+          "val": true,
+          "type": "boolean",
+          "desc": "开启表示执行,关闭表示不执行!"
+        },
+        {
+          "id": "wyy_shareMsg",
+          "name": "动态发布内容",
+          "val": "",
+          "type": "text",
+          "desc": "发布动态的文字内容,将会随机选择推荐歌单一起发布!"
+        },{
+          "id": "wyy_doCommentYourself",
+          "name": "是否执行发布主创说任务",
+          "val": true,
+          "type": "boolean",
+          "desc": "开启表示执行,关闭表示不执行!"
+        },
+        {
+          "id": "wyy_commentMsg",
+          "name": "动态主创说内容",
+          "val": "",
+          "type": "text",
+          "desc": "发布主创说文字内容!"
+        },{
+          "id": "wyy_doRePrivatrMessage",
+          "name": "是否执行发送私信任务",
+          "val": true,
+          "type": "boolean",
+          "desc": "开启表示执行,关闭表示不执行!"
+        },
+        {
+          "id": "wyy_reMsg",
+          "name": "发送私信内容",
+          "val": "",
+          "type": "text",
+          "desc": "发送私信的文字内容!"
+        },{
+          "id": "wyy_doReplyMusicComment",
+          "name": "是否执行回复粉丝评论任务",
+          "val": true,
+          "type": "boolean",
+          "desc": "开启表示执行,关闭表示不执行!"
+        },{
+          "id": "wyy_reCommentMsg",
+          "name": "回复粉丝评论内容",
+          "val": "",
+          "type": "text",
+          "desc": "回复粉丝私信文字内容!"
+        },{
+          "id": "wyy_doViewMyCircle",
+          "name": "是否执行访问自己云圈任务",
+          "val": true,
+          "type": "boolean",
+          "desc": "开启表示执行,关闭表示不执行!"
+        },{
+          "id": "wyy_doWatchLesson",
+          "name": "是否执行观看课程任务",
+          "val": true,
+          "type": "boolean",
+          "desc": "开启表示执行,关闭表示不执行!"
+        }
+      ]
+    }],
+  "author": "@laoxinH",
+  "repo": "https://github.com/laoxinH/MyScript",
+  "icons": [
+    "https://pan.laoxin.top/al1/images/icon.png",
+    "https://pan.laoxin.top/al1/images/icon.png"
   ]
 }
