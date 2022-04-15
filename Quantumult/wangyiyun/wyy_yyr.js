@@ -1,7 +1,7 @@
 /**
  * 网易云音乐人
  * @author: github@laoxinH
- * @version: 2.1
+ * @version: 2.3
  * 每天10点10分执行任务，如有需要请自行修改cron表达式
  ==============cookie获取方式===================
  打开我在校园微信小程序--"我的",脚本将会自动获取,当看到通知获取成功时即可
@@ -37,7 +37,6 @@ let shareMsg = getData("shareMsg")? getData("shareMsg"):"好歌推荐~~"
 console.log("【通知📢】", "开始初始化脚本, 当前环境 : " + (isPhone ? "手机端" : "nodejs"),"开始执行!");
 if (isPhone) {
     cookie = $.toStr(getData("cookie")).replaceAll("\n","");
-    console.log(cookie)
     users = [{
         cookie:cookie,
         phone:"",
