@@ -250,7 +250,7 @@ async function doTask() {
 }
 // 发布动态任务
 async function doShareBlog(){
-    if (getData("doShareBlog") == null && getData("doShareBlog") == "" ? getData("doShareBlog") : true) {
+    if (getData("doShareBlog") == false ? true : false) {
         console.log("【通知】 已关闭执行发布动态任务！");
         return;
     }
@@ -270,7 +270,7 @@ async function doShareBlog(){
 }
 // 音乐人签到
 async function doSignInMusician(){
-    if (getData("doSignInMusician") == null && getData("doSignInMusician") == "" ? getData("doSignInMusician") : true) {
+    if (getData("doSignInMusician") == false ? true : false) {
         console.log("【通知】 已关闭执行音乐人签到任务！");
         return;
     }
@@ -286,7 +286,7 @@ async function doSignInMusician(){
 }
 // 回复评论
 async function doReplyMusicComment(){
-    if (getData("doReplyMusicComment") == null && getData("doReplyMusicComment") == "" ? getData("ddoReplyMusicCommentSignInMusician") : true) {
+    if (getData("doReplyMusicComment") == false ? true : false) {
         console.log("【通知】 已关闭执行回复评论任务！");
         return;
     }
@@ -325,7 +325,7 @@ async function doReplyMusicComment(){
 
 // 回复粉丝私信
 async function doRePrivatrMessage(){
-    if (getData("doRePrivatrMessage") == null && getData("doRePrivatrMessage") == "" ? getData("doRePrivatrMessage") : true) {
+    if (getData("doRePrivatrMessage") == false ? true : false) {
         console.log("【通知】 已关闭执行回复粉丝私信！");
         return;
     }
@@ -348,7 +348,7 @@ async function doRePrivatrMessage(){
 
 //访问我的圈
 async function doViewMyCircle(){
-    if (getData("doViewMyCircle") == null && getData("doViewMyCircle") == "" ? getData("doViewMyCircle") : true) {
+    if (getData("doViewMyCircle") == false ? true : false) {
         console.log("【通知】 已关闭执行访问我的云圈！");
         return;
     }
@@ -385,7 +385,7 @@ async function doViewMyCircle(){
 }
 //发布主创说
 async function doCommentYourself(){
-    if (getData("doCommentYourself") == null && getData("doCommentYourself") == "" ? getData("doCommentYourself") : true) {
+    if (getData("doCommentYourself") == false ? true : false) {
         console.log("【通知】 已关闭执行发布主创说！");
         return;
     }
@@ -409,7 +409,7 @@ async function doCommentYourself(){
 }
 // 执行观看课程任务
 async function doWatchLesson(){
-    if (getData("doWatchLesson") == null && getData("doWatchLesson") == "" ? getData("doWatchLesson") : true) {
+    if (getData("doWatchLesson") == false ? true : false) {
         console.log("【通知】 已关闭执行观看课程任务！");
         return;
     }
