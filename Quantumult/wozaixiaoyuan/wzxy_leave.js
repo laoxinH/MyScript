@@ -94,7 +94,7 @@ if (user["approve"][0]["time"] == "") {//批假时间 前一天随机时刻
 
 
 let  data = {
-    approve:[];
+    approve:[]
 };
 
 for (x in user) {//读取用户自定义设置
