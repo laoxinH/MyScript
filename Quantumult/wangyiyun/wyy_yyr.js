@@ -1,7 +1,7 @@
 /**
  * 网易云音乐人
  * @author: github@laoxinH
- * @version: 2.3
+ * @version: 2.4
  * 每天10点10分执行任务，如有需要请自行修改cron表达式
  ==============cookie获取方式===================
  打开我在校园微信小程序--"我的",脚本将会自动获取,当看到通知获取成功时即可
@@ -34,7 +34,7 @@ let shareMsg = getData("shareMsg")? getData("shareMsg"):"好歌推荐~~"
     ,reCommentMsg = getData("reCommentMsg")?getData("reCommentMsg"):"感谢支持和意见~~";
 
 // 初始化脚本
-console.log("【通知📢】", "开始初始化脚本, 当前环境 : " + (isPhone ? "手机端" : "nodejs"),"开始执行!");
+console.log("【通知📢】 开始初始化脚本, 当前环境 : " + (isPhone ? "手机端" : "nodejs"),"开始执行!");
 if (isPhone) {
     cookie = $.toStr(getData("cookie")).replaceAll("\n","");
     users = [{
@@ -58,7 +58,11 @@ if (!isPhone){
         if (!await getCookie(user)) {
             continue;
         };
-        await getMusicianInfo();
+        let info = await getMusicianInfo();
+        if (info.code == 600) {
+            console.log("用户不是音乐人!");
+            continue;
+        }
         message += "音乐人昵称:" + $.artistName + "\n";
         let YDCount = $.YDCount;
         await flashTaskInfo();
@@ -72,6 +76,7 @@ if (!isPhone){
         $.getYD = $.YDCount - YDCount;
         message += "执行脚本获得云豆:" + ($.getYD) + "\n" + "当前云豆数量:" + $.YDCount + "\n\n\n";
     }
+
     message += "有些任务已经下线，但是脚本获取任务列表时任然存在，不用管！\r\n此脚本目前只是执行：登录音乐人中心、发布动态、发布主创说、回复粉丝私信、回复粉丝评论、访问自己云圈 六个任务，其他任务请手动执行！";
     message += "laoxinH的脚本仓库地址，获取更多🔥脚本和打赏请访问：https://github.com/laoxinH/MyScript\r\n💕感谢支持😊";
     await sendNotify();
@@ -158,12 +163,16 @@ async function sendNotify(){
 async function getMusicianInfo(){
     console.log("【通知📢】开始获取音乐人账户信息");
     let YDData = await api.getYDCount();
-    $.YDCount = parseInt(YDData.data.data.cloudBean);
-    let userData = await api.getMusicianInfo();
-    $.artistName = userData.data.data.artistName;
-    $.artistId = userData.data.data.artistId;
-    console.log("【通知📢】 音乐人昵称: "+$.artistName,"当前账户云豆数量: "+ $.YDCount);
-
+    try{
+        $.YDCount = parseInt(YDData.data.data.cloudBean);
+        let userData = await api.getMusicianInfo();
+        $.artistName = userData.data.data.artistName;
+        $.artistId = userData.data.data.artistId;
+        console.log("【通知📢】 音乐人昵称: "+$.artistName,"当前账户云豆数量: "+ $.YDCount);
+    } catch (e) {
+        // TODO
+    }
+    return YDData.msg;
 }
 // 刷新任务列表
 async function flashTaskInfo(){
@@ -336,7 +345,7 @@ async function doRePrivatrMessage(){
 
     let index = Math.round(Math.random()*(msgList.length-1));
     let msg = msgList[index];
-   let data = await api.sendPrivatrMessage(reMsg,msg.fromUser.userId);
+    let data = await api.sendPrivatrMessage(reMsg,msg.fromUser.userId);
     if ( data.info){
         console.log(`✅回复粉丝私信成功！\n回复用户：${msg.fromUser.nickname}\n回复内容：${reMsg}`);
         message += `✅回复粉丝私信成功!\n回复用户：${msg.fromUser.nickname}\n回复内容：${reMsg}\n`;
